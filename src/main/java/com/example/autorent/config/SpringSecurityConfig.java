@@ -23,14 +23,21 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .formLogin()
-                .and().logout()
-                .logoutSuccessUrl("/")
+                .loginPage("/sign")
+                .loginProcessingUrl("/loginProcess")
+                .defaultSuccessUrl("/profile", true)
+                .usernameParameter("email")
+                .passwordParameter("password")
+
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/").permitAll()
+                .antMatchers("/").permitAll()
+                .antMatchers(HttpMethod.GET,"/profile").authenticated()
                 .anyRequest().permitAll();
 
     }
+
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -43,3 +50,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 }
+
+
+//

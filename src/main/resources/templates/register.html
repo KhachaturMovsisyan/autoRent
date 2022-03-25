@@ -214,7 +214,7 @@
                                     <div class="offset-lg-1 col-lg-7 col-md-8">
                                     	<div class="cola-form">
                                         	<h4><i class="flaticon-sign-in"></i>Register:</h4>
-                                            <form method="post" action="/add/user">
+                                            <form method="post" action="/user/registration" enctype="multipart/form-data">
                                             	<label>Name:</label>
                                                 <input type="text" name="name">
                                                 <label>surname:</label>
@@ -230,11 +230,7 @@
 
 												<div class="dp-edit">
 													<span>Profile image:</span>
-													<figure>
-														<img src="../images/resources/renter-2.jpg" alt="">
-													</figure>
-													<a href="#" title=""><i class="fa fa-close"></i>delete</a>
-													<input type="file">
+													<input type="file" name="image"/><br>
 												</div>
 												<input type="checkbox" id="checkbox">
 												<label for="checkbox">I accept Collabors’s <a href="#" title="">Terms & Conditions</a></label>
