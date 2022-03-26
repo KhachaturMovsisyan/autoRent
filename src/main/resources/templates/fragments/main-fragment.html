@@ -17,13 +17,29 @@
                 <div class="login-area" th:if="${currentUser==null}">
                     <ul>
                         <li class="log-in"><a href="/sign" title="Login"><i class="flaticon-unlocked"></i> login</a></li>
-                        <li class="Register"><a href="/user/registration" title="Register"><i class="flaticon-checked"></i> register</a></li>
-                        <li class="post"><a href="#" title="">+post</a></li>
+                        <li class="Register"><a href="/user/registration" ><i class="flaticon-checked"   th:text="#{register}"></i> </a></li>
+<!--                        <li class="post"><a href="#" title="">+post</a></li>-->
+
+                        <div style="float: right; margin-right: 15px">
+                            <a href="?lang=hy" style="text-decoration: none"><img src="imagelanguages/250096390_430549405097620_7516228673324376786_n.png" width="27px" height="20px"></a>
+                            <a href="?lang=ru" style="text-decoration: none"><img src="imagelanguages/277312332_2347125902094422_7871717240644556754_n.jpg" width="27px" height="20px"></a>
+                            <a href="?lang=us" style="text-decoration: none"><img src="imagelanguages/277328753_3139898912998157_5340608682366958819_n.jpg" width="27px" height="20px"></a>
+                        </div>
+
                     </ul>
                 </div>
                 <div class="login-area" th:if="${currentUser != null}">
                     <ul>
-                        <li class="post"><a href="#" title="">+post</a></li>
+<!--                        <li class="post"><a href="#" title="">+post</a></li>-->
+
+                        <div style="float: right; margin-right: 15px">
+                            <a href="?lang=en" style="text-decoration: none"><img src="imagelanguages/250096390_430549405097620_7516228673324376786_n.png" width="27px" height="20px"></a>
+                            <a href="?lang=ru" style="text-decoration: none"><img src="imagelanguages/277312332_2347125902094422_7871717240644556754_n.jpg" width="27px" height="20px"></a>
+                            <a href="?lang=hy" style="text-decoration: none"><img src="imagelanguages/277328753_3139898912998157_5340608682366958819_n.jpg" width="27px" height="20px"></a>
+                        </div>
+
+
+
                         <li class="log-in">
                             <a href="#" title="">
                                 <img src="../images/resources/login-avatar.jpg" alt="">

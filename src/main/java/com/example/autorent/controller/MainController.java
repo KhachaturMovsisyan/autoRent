@@ -12,7 +12,7 @@ public class MainController {
     @GetMapping("/")
     public String main(ModelMap modelMap,
                        @AuthenticationPrincipal CurrentUser currentUser) {
-        modelMap.addAttribute("userol", currentUser.getUser());
+//        modelMap.addAttribute("userol", currentUser.getUser());
         return "index";
     }
 
