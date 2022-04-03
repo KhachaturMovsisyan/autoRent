@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 @Data
 @NoArgsConstructor
@@ -22,8 +24,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int Id;
+    @NotEmpty(message = "Name is required")
     private String name;
     private String surname;
+    @Email
     private String email;
     private String phoneNumber;
     private String password;
@@ -34,6 +38,8 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private UserType userType;
+
+
 
 
 }

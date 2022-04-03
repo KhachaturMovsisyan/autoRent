@@ -82,8 +82,8 @@
 								</li>
 								<li><a href="#" title="">Become a partner</a>
 									<ul>
-										<li><a href="user-profile.html" title="">As a driver</a></li>
-										<li><a href="user-profile-v2.html" title="">As a dealer</a></li>
+										<li><a href="/asDriver" title="">As a driver</a></li>
+										<li><a href="/asDealer" title="">As a dealer</a></li>
 									</ul>
 								</li>
 								<!--									<li><a href="#" title=""><i class="fa fa-ellipsis-v"></i></a>-->
@@ -224,28 +224,25 @@
 								<div class="offset-lg-1 col-lg-7 col-md-8">
 									<div class="cola-form">
 										<h4><i class="flaticon-sign-in"></i>Register:</h4>
-										<form method="post" action="/register" th:object="${createUserRequest}"   enctype="multipart/form-data">
-
-											<label>Name:</label>
-											<input type="text" name="name" maxlength="10" >
-<!--											<a th:if="${#fields.hasErrors('name')}" th:errors="*{'name'}">Name Error</td>></a>-->
-											<label>surname:</label>
-											<input type="text" name="surname">
+										<form method="post" action="/dealer/registration" enctype="multipart/form-data">
+											<label>Company Name:</label>
+											<input type="text" name="name">
 											<label>phone number:</label>
 											<input type="text" name="phoneNumber">
 											<label>bank account number:</label>
 											<input type="text" name="bankAccountNumber">
 											<label>email:</label>
-											<input type="text" name="email" required>
+											<input type="text" name="email">
 											<label>password:</label>
 											<input type="password" name="password">
 
 											<div class="dp-edit">
-												<span>Profile image:</span>
+												<span>Company logo:</span>
 												<input type="file" name="image"/><br>
 											</div>
 											<input type="checkbox" id="checkbox">
 											<label for="checkbox">I accept Collabors’s <a href="#" title="">Terms & Conditions</a></label>
+
 
 
 											<button type="submit" class="theme-btn">register</button>

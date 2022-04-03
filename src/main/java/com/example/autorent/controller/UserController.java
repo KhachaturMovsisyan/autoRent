@@ -1,87 +1,88 @@
 package com.example.autorent.controller;
 
+import com.example.autorent.dto.CreateUserRequest;
 import com.example.autorent.entity.User;
 import com.example.autorent.entity.UserType;
 import com.example.autorent.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.io.IOUtils;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 public class UserController {
 
+
+    @Value("${image.upload.path}")
+    private String imagePath;
+
     private final UserService userService;
+    private final ModelMapper mapper;
     //  private final MailService mailService;
 
-
-    @GetMapping("/user/registration")
-    public String register() {
-        return "register";
-    }
-
-    @PostMapping("/user/registration")
-    public String addUser(@ModelAttribute User user, @RequestParam("image") MultipartFile file) throws IOException {
-
-        user.setUserType(UserType.USER);
-        userService.save(user, file);
-        return "redirect:/";
-    }
 
     @GetMapping("/profile")
     public String userProfile() {
         return "index";
     }
-//    @PostMapping("/errorPage")
-//    public String error() {
-//        return "404";
-//    }
+
+    @PostMapping("/user/registration")
+    public String addUser(@RequestParam("image") MultipartFile file,
+                          @ModelAttribute @Valid CreateUserRequest createUserRequest ) throws IOException {
+
+        User user = mapper.map(createUserRequest, User.class);
+        user.setUserType(UserType.USER);
+        userService.save(user, file);
+        return "redirect:/";
+
+    }
 
 
-//    @GetMapping(value = "/getImage", produces = MediaType.IMAGE_JPEG_VALUE)
-//    public @ResponseBody byte[] getImage(@RequestParam("picName") String picName) throws IOException {
-//
-//
-//        InputStream inputStream = Files.newInputStream(Paths.get(imagePath, picName));
-//
-//        return IOUtils.toByteArray(inputStream);
-//    }
+    @PostMapping("/driver/registration")
+    public String addDriver(@ModelAttribute User user, @RequestParam("image") MultipartFile file) throws IOException {
+
+        user.setUserType(UserType.DRIVER);
+        userService.save(user, file);
+        return "redirect:/";
+    }
+
+    @PostMapping("/dealer/registration")
+    public String addDealer(@ModelAttribute User user, @RequestParam("image") MultipartFile file) throws IOException {
+
+        user.setUserType(UserType.DEALER);
+        userService.save(user, file);
+        return "redirect:/";
+    }
+
+
+    @GetMapping(value = "/getImage", produces = MediaType.IMAGE_JPEG_VALUE)
+    public @ResponseBody byte[] getImage(@RequestParam("picName") String picName) throws IOException {
+        InputStream inputStream = new FileInputStream(imagePath + picName);
+        return IOUtils.toByteArray(inputStream);
+    }
 
 
 }
 
-//    @PostMapping("/user/add")
-//    public String addUser(@ModelAttribute User user, ModelMap map) {
-//        List<String> errorMsgs = new ArrayList<>();
-//        if (user.getName() == null || user.getName().equals("")) {
-//            errorMsgs.add("name is required");
-//        }
-//        if (user.getSurname() == null || user.getSurname().equals("")) {
-//            errorMsgs.add("surname is required");
-//        }
-//        if (user.getEmail() == null || user.getEmail().equals("")) {
-//            errorMsgs.add("email is required");
-//        }
-//        if (!errorMsgs.isEmpty()) {
-//            map.addAttribute("errors", errorMsgs);
-//            return "saveUser";
-//        }
-//
-////        userService.save(user);
-////        mailService.sendMail(user.getEmail(), "Welcome " + user.getSurname(), "You have successfully register, " + user.getName());
-////        return "redirect:/";
-//    }
 
-//    @GetMapping("/editUser/{id}")
-//    public String editUserPage(ModelMap map,
-//                               @PathVariable("id") int id) {
-//        map.addAttribute("user", userService.findById(id));
-//        return "saveUser";
-//
-//    }
+
+
+
+
+
