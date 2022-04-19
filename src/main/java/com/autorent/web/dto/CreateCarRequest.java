@@ -31,7 +31,11 @@ public class CreateCarRequest {
     @Enumerated(EnumType.STRING)
     private StatusType statusType;
 
-   private String type;
+
+   private int count;
+
+ 
+
 
 
 }
