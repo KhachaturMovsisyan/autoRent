@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <title>Car East</title>
+    <link rel="icon" type="image/png" href="../images/fav.png">
+
+    <link rel="stylesheet" href="../css/apps.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/color.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+
+</head>
+<body>
+<div class="site-layout">
+    <div class="header-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="top-links">
+                        <li><i class="flaticon-info"></i><a href="faq.html" title="">Faq's</a></li>
+                    </ul>
+
+                    <div style="float: right; margin-right: 50px">
+                        <a href="?lang=hy" style="text-decoration: none"><img src="imagelanguages/img/arm.png"
+                                                                              width="27px" height="20px"></a>
+                        <a href="?lang=us" style="text-decoration: none"><img src="imagelanguages/img/eng.jpg"
+                                                                              width="27px" height="20px"></a>
+                    </div>
+
+
+                    <div class="login-area" th:if="${currentUser==null}">
+                        <ul>
+                            <li class="log-in"><a href="/sign"><i class="flaticon-unlocked" th:text="#{login}"></i> </a>
+                            </li>
+                            <li class="Register"><a href="/registration"><i class="flaticon-checked">register</i> </a>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <div class="login-area" th:if="${currentUser!=null}" }>
+
+                        <ul>
+                            <li class="log-in">
+                                <a href="#" title="">
+                                    <img th:if="${currentUser.getUser().getPicUrl()!=null && !currentUser.getUser().getPicUrl().isEmpty()}"
+                                         th:src="@{/getImage(picName=${currentUser.getUser().getPicUrl()})}" width="30">
+
+                                    <img th:if="${currentUser.getUser().getPicUrl()==null || currentUser.getUser().getPicUrl().isEmpty()}"
+                                         src="../images/profile.png" width="40">
+                                </a>
+
+
+                                <div class="login-dropdown">
+                                    <span th:text="${currentUser.getUser().getName()}"></span>
+                                    <a href="" title="">see profile</a>
+                                    <ul>
+                                        <li class="signout"><a href="/logout" title="">sign out <i
+                                                class="fa fa-power-off"></i></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--						<div class="login-area"  th:if="${currentUser!=null}">-->
+                    <!--							<ul>-->
+                    <!--								<div style="float: right; margin-right: 50px">-->
+                    <!--									<li class="log-in" style="margin-right: 50px" >-->
+                    <!--										<a href="#" title="">-->
+                    <!--											<img src="../images/resources/login-avatar.jpg" alt="">-->
+                    <!--										</a>-->
+                    <!--										<div class="login-dropdown">-->
+                    <!--											<span></span>-->
+                    <!--											<a href="#" title="">see profile</a>-->
+                    <!--											<ul>-->
+                    <!--												<li><a href="#" title="">points <span class="badge">0</span></a></li>-->
+                    <!--												<li><a href="#" title="">cars</a></li>-->
+                    <!--												<li><a href="#" title="">balance</a></li>-->
+                    <!--												<li><a href="#" title="">earning</a></li>-->
+                    <!--												<li class="signout"><a href="#" title="">sign out <i class="fa fa-power-off"></i></a></li>-->
+                    <!--											</ul>-->
+                    <!--										</div>-->
+                    <!--								</div>-->
+                    <!--									</li>-->
+                    <!--							</ul>-->
+                    <!--						</div>-->
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <!-- topbar -->
+
+    <div class="topbar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <header>
+                        <div class="logo">
+                            <a href="index.html" title="index.html"><img src="../images/logo-black.png" alt=""></a>
+                        </div>
+                        <nav>
+                            <ul class="main-menu">
+                                <li><a href="/" title="">Home</a>
+                                </li>
+                                <li><a href="/cars" title="">cars</a>
+                                </li>
+                                <li><a href="#" title="">Term and Policy</a>
+                                </li>
+                                <li><a href="#" title="">About Us</a>
+                                </li>
+                                <li th:if="${currentUser == null}"><a href="#" title="">Become a partner</a>
+                                    <ul>
+                                        <li><a href="/registerAsDriver" title="">As a driver</a></li>
+                                        <li><a href="/registerAsDealer" title="">As a dealer</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                        <div class="time-info">
+                            <i class="flaticon-phone-call-1"></i>
+                            <span><i></i> (094) 020 - 582</span>
+                        </div>
+                    </header>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Responsive Header -->
+
+    <div class="sub-head blackish ext-low-opacity">
+        <div class="bg-image" style="background-image: url(/images/resources/subhead-bg.jpg)"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="cola-head">
+                        <div class="head-meta">
+                            <h4>Submit your car</h4>
+                        </div>
+
+                        <div class="info-links">
+                            <a href="#" title="">how does this work</a>
+                            <span><i class="fa fa-phone"></i>call (094) 317 - 544</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- subhead -->
+
+    <section>
+        <div class="space">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="leasing-car">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-7">
+
+                                    <div class="offset-lg-1 col-lg-7 col-md-7">
+                                        <div class="cola-form">
+                                            <h4><i class="flaticon-sign-in"></i>Add Car:</h4>
+                                            <form method="post" action="/saveCar" enctype="multipart/form-data">
+
+                                                <h5>Options:</h5><br>
+
+
+                                                <label>Mark:</label>
+                                                <select style="width: 500px" class="nice-select" name="mark"
+                                                        id="mySelect" onclick="addCars()"
+                                                        onchange="selectNum()">
+                                                    <option value="avto">chose car</option>
+                                                </select>
+
+                                                <span>Model:</span>
+                                                <select style="width: 500px" class="nice-select" name="model" id="model"
+                                                        onclick="addCarsModel()"
+                                                        onchange="selectModelNum()">
+                                                    <option value="avto">chose model</option>
+                                                </select> <br>
+
+                                                <span>Body Style:</span>
+                                                <select style="width: 500px" class="nice-select" name="CategoryType">
+                                                    <option th:each="body : ${T(com.autorent.web.entity.CategoryType).values()}"
+                                                            th:value="${body}" th:text="${body}">chose body style
+                                                    </option>
+                                                </select> <br>
+
+
+                                                <span>Car Year:</span>
+                                                <select style="width: 500px" class="nice-select" name="carModelYear">
+                                                    <option>year</option>
+                                                    <option>1999</option>
+                                                    <option>2000</option>
+                                                    <option>2001</option>
+                                                    <option>2002</option>
+                                                    <option>2003</option>
+                                                    <option>2004</option>
+                                                    <option>2005</option>
+                                                    <option>2006</option>
+                                                    <option>2007</option>
+                                                    <option>2008</option>
+                                                    <option>2009</option>
+                                                    <option>2010</option>
+                                                    <option>2011</option>
+                                                    <option>2012</option>
+                                                    <option>2013</option>
+                                                    <option>2014</option>
+                                                    <option>2015</option>
+                                                    <option>2016</option>
+                                                    <option>2017</option>
+                                                    <option>2018</option>
+                                                    <option>2019</option>
+                                                    <option>2020</option>
+                                                    <option>2021</option>
+                                                    <option>2022</option>
+                                                </select>
+
+                                                <br>
+                                                <span>Price Per Day:</span>
+                                                <input style="width: 500px" class="nice-select"
+                                                       type="number" name="pricePerDay" required placeholder="0"><br>
+
+
+                                                <span>Description:</span>
+                                                <textarea style="width: 500px; height: 170px" class="nice-select"
+                                                          type="text" name="Description" required> </textarea><br>
+
+
+                                                <span>Picture:</span>
+                                                <div class="dp-edit">
+                                                    <input type="file" name="images" multiple/><br>
+                                                </div>
+
+
+                                                <button type="submit" class="theme-btn">Add Car</button>
+                                            </form>
+                                            <!--                                            <span>Are you a member already? <a href="/sign" title="">Login here</a></span>-->
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="offset-lg-1 col-lg-5 col-md-5">
+                                    <div class="request">
+                                        <figure>
+                                            <img src="images/resources/car.png" alt="">
+                                        </figure>
+                                        <div class="request-box">
+                                            <span><i>car</i><em>Mercedes Benz GLA-Class</em></span>
+                                            <span><i>Per month:</i> <ins>$299</ins></span>
+                                            <!--                                            <a href="#" title="" class="theme-btn">+ send the request</a>-->
+                                            <p>Offer subject to availability.</p>
+                                        </div>
+                                        <ul class="contact-links">
+                                            <li><i class="fa fa-long-arrow-right"></i>Any question? Check our <a
+                                                    href="#" title="">FAQs</a> page.
+                                            </li>
+                                            <li><i class="fa fa-long-arrow-right"></i>Email us at <a href="#" title="">Car
+                                                <span class="__cf_email__"
+                                                      data-cfemail="4f0a2e3c3b0f2c20213b2e2c3b612c2022">[email&#160;protected]</span></a>
+                                            </li>
+                                            <li><i class="fa fa-long-arrow-right"></i>Call us at (012) 345 - 6789</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- form section -->
+
+    <footer class="light">
+        <div class="mockup-right">
+            <img src="../images/resources/footer-mockup.png" alt="">
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-sm-6">
+                    <div class="widget">
+                        <a href="index.html" title=""><img src="../images/logo-black.png" alt=""></a>
+                        <p>
+                            The trio took this simple idea and built it into the world’s leading carpooling platform,
+                            connecting millions of people going the same way.
+                        </p>
+                        <ul class="social">
+                            <li><a href="#" title="" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#" title="" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#" title="" class="instagram"><i class="fa fa-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-6">
+                    <div class="widget">
+                        <div class="widget-title"><h4>useful links</h4></div>
+                        <ul class="list-style">
+                            <li><a href="#" title="">leasing</a></li>
+                            <li><a href="#" title="">submit route</a></li>
+                            <li><a href="#" title="">how does it work?</a></li>
+                            <li><a href="#" title="">agent listings</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="widget">
+                        <div class="widget-title"><h4>weekly news letter</h4></div>
+                        <div class="news-letter">
+                            <p>We may send you information about related events, webinars, products and services which
+                                we believe.</p>
+                            <form method="post">
+                                <input type="text" placeholder="Enter your email address">
+                                <button type="submit"><i class="fa fa-paper-plane-o"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-6">
+                    <div class="widget">
+                        <div class="widget-title"><h4>download apps</h4></div>
+                        <ul class="colla-apps">
+                            <li><a href="#" title=""><i class="flaticon-android"></i> android</a></li>
+                            <li><a href="#" title=""><i class="flaticon-apple"></i> iPhone</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottombar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <span class="copyright">© 2019. All rights reserved.</span>
+                        <i><img src="../images/credit-cards.png" alt=""></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer><!-- footer -->
+
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script src="../js/apps.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="../js/script.js"></script>
+<script>
+    var cars = [{
+        "brand": "Seat",
+        "models": ["Alhambra", "Altea", "Altea XL", "Arosa", "Cordoba", "Cordoba Vario", "Exeo", "Ibiza", "Ibiza ST", "Exeo ST", "Leon", "Leon ST", "Inca", "Mii", "Toledo"]
+    },
+        {
+            "brand": "Renault",
+            "models": ["Captur", "Clio", "Clio Grandtour", "Espace", "Express", "Fluence", "Grand Espace", "Grand Modus", "Grand Scenic", "Kadjar", "Kangoo", "Kangoo Express", "Koleos", "Laguna", "Laguna Grandtour", "Latitude", "Mascott", "Mégane", "Mégane CC", "Mégane Combi", "Mégane Grandtour", "Mégane Coupé", "Mégane Scénic", "Scénic", "Talisman", "Talisman Grandtour", "Thalia", "Twingo", "Wind", "Zoé"]
+        },
+        {
+            "brand": "Peugeot",
+            "models": ["1007", "107", "106", "108", "2008", "205", "205 Cabrio", "206", "206 CC", "206 SW", "207", "207 CC", "207 SW", "306", "307", "307 CC", "307 SW", "308", "308 CC", "308 SW", "309", "4007", "4008", "405", "406", "407", "407 SW", "5008", "508", "508 SW", "605", "806", "607", "807", "Bipper", "RCZ"]
+        },
+        {
+            "brand": "Dacia",
+            "models": ["Dokker", "Duster", "Lodgy", "Logan", "Logan MCV", "Logan Van", "Sandero", "Solenza"]
+        },
+        {
+            "brand": "Citroën",
+            "models": ["Berlingo", "C-Crosser", "C-Elissée", "C-Zero", "C1", "C2", "C3", "C3 Picasso", "C4", "C4 Aircross", "C4 Cactus", "C4 Coupé", "C4 Grand Picasso", "C4 Sedan", "C5", "C5 Break", "C5 Tourer", "C6", "C8", "DS3", "DS4", "DS5", "Evasion", "Jumper", "Jumpy", "Saxo", "Nemo", "Xantia", "Xsara"]
+        },
+        {
+            "brand": "Opel",
+            "models": ["Agila", "Ampera", "Antara", "Astra", "Astra cabrio", "Astra caravan", "Astra coupé", "Calibra", "Campo", "Cascada", "Corsa", "Frontera", "Insignia", "Insignia kombi", "Kadett", "Meriva", "Mokka", "Movano", "Omega", "Signum", "Vectra", "Vectra Caravan", "Vivaro", "Vivaro Kombi", "Zafira"]
+        },
+        {
+            "brand": "Alfa Romeo",
+            "models": ["145", "146", "147", "155", "156", "156 Sportwagon", "159", "159 Sportwagon", "164", "166", "4C", "Brera", "GTV", "MiTo", "Crosswagon", "Spider", "GT", "Giulietta", "Giulia"]
+        },
+        {
+            "brand": "Škoda",
+            "models": ["Favorit", "Felicia", "Citigo", "Fabia", "Fabia Combi", "Fabia Sedan", "Felicia Combi", "Octavia", "Octavia Combi", "Roomster", "Yeti", "Rapid", "Rapid Spaceback", "Superb", "Superb Combi"]
+        },
+        {
+            "brand": "Chevrolet",
+            "models": ["Alero", "Aveo", "Camaro", "Captiva", "Corvette", "Cruze", "Cruze SW", "Epica", "Equinox", "Evanda", "HHR", "Kalos", "Lacetti", "Lacetti SW", "Lumina", "Malibu", "Matiz", "Monte Carlo", "Nubira", "Orlando", "Spark", "Suburban", "Tacuma", "Tahoe", "Trax"]
+        },
+        {
+            "brand": "Porsche",
+            "models": ["911 Carrera", "911 Carrera Cabrio", "911 Targa", "911 Turbo", "924", "944", "997", "Boxster", "Cayenne", "Cayman", "Macan", "Panamera"]
+        },
+        {
+            "brand": "Honda",
+            "models": ["Accord", "Accord Coupé", "Accord Tourer", "City", "Civic", "Civic Aerodeck", "Civic Coupé", "Civic Tourer", "Civic Type R", "CR-V", "CR-X", "CR-Z", "FR-V", "HR-V", "Insight", "Integra", "Jazz", "Legend", "Prelude"]
+        },
+        {
+            "brand": "Subaru",
+            "models": ["BRZ", "Forester", "Impreza", "Impreza Wagon", "Justy", "Legacy", "Legacy Wagon", "Legacy Outback", "Levorg", "Outback", "SVX", "Tribeca", "Tribeca B9", "XV"]
+        },
+        {
+            "brand": "Mazda",
+            "models": ["121", "2", "3", "323", "323 Combi", "323 Coupé", "323 F", "5", "6", "6 Combi", "626", "626 Combi", "B-Fighter", "B2500", "BT", "CX-3", "CX-5", "CX-7", "CX-9", "Demio", "MPV", "MX-3", "MX-5", "MX-6", "Premacy", "RX-7", "RX-8", "Xedox 6"]
+        },
+        {
+            "brand": "Mitsubishi",
+            "models": ["3000 GT", "ASX", "Carisma", "Colt", "Colt CC", "Eclipse", "Fuso canter", "Galant", "Galant Combi", "Grandis", "L200", "L200 Pick up", "L200 Pick up Allrad", "L300", "Lancer", "Lancer Combi", "Lancer Evo", "Lancer Sportback", "Outlander", "Pajero", "Pajeto Pinin", "Pajero Pinin Wagon", "Pajero Sport", "Pajero Wagon", "Space Star"]
+        },
+        {
+            "brand": "Lexus",
+            "models": ["CT", "GS", "GS 300", "GX", "IS", "IS 200", "IS 250 C", "IS-F", "LS", "LX", "NX", "RC F", "RX", "RX 300", "RX 400h", "RX 450h", "SC 430"]
+        },
+        {
+            "brand": "Toyota",
+            "models": ["4-Runner", "Auris", "Avensis", "Avensis Combi", "Avensis Van Verso", "Aygo", "Camry", "Carina", "Celica", "Corolla", "Corolla Combi", "Corolla sedan", "Corolla Verso", "FJ Cruiser", "GT86", "Hiace", "Hiace Van", "Highlander", "Hilux", "Land Cruiser", "MR2", "Paseo", "Picnic", "Prius", "RAV4", "Sequoia", "Starlet", "Supra", "Tundra", "Urban Cruiser", "Verso", "Yaris", "Yaris Verso"]
+        },
+        {
+            "brand": "BMW",
+            "models": ["i3", "i8", "M3", "M4", "M5", "M6", "Rad 1", "Rad 1 Cabrio", "Rad 1 Coupé", "Rad 2", "Rad 2 Active Tourer", "Rad 2 Coupé", "Rad 2 Gran Tourer", "Rad 3", "Rad 3 Cabrio", "Rad 3 Compact", "Rad 3 Coupé", "Rad 3 GT", "Rad 3 Touring", "Rad 4", "Rad 4 Cabrio", "Rad 4 Gran Coupé", "Rad 5", "Rad 5 GT", "Rad 5 Touring", "Rad 6", "Rad 6 Cabrio", "Rad 6 Coupé", "Rad 6 Gran Coupé", "Rad 7", "Rad 8 Coupé", "X1", "X3", "X4", "X5", "X6", "Z3", "Z3 Coupé", "Z3 Roadster", "Z4", "Z4 Roadster"]
+        },
+        {
+            "brand": "Volkswagen",
+            "models": ["Amarok", "Beetle", "Bora", "Bora Variant", "Caddy", "Caddy Van", "Life", "California", "Caravelle", "CC", "Crafter", "Crafter Van", "Crafter Kombi", "CrossTouran", "Eos", "Fox", "Golf", "Golf Cabrio", "Golf Plus", "Golf Sportvan", "Golf Variant", "Jetta", "LT", "Lupo", "Multivan", "New Beetle", "New Beetle Cabrio", "Passat", "Passat Alltrack", "Passat CC", "Passat Variant", "Passat Variant Van", "Phaeton", "Polo", "Polo Van", "Polo Variant", "Scirocco", "Sharan", "T4", "T4 Caravelle", "T4 Multivan", "T5", "T5 Caravelle", "T5 Multivan", "T5 Transporter Shuttle", "Tiguan", "Touareg", "Touran"]
+        },
+        {
+            "brand": "Suzuki",
+            "models": ["Alto", "Baleno", "Baleno kombi", "Grand Vitara", "Grand Vitara XL-7", "Ignis", "Jimny", "Kizashi", "Liana", "Samurai", "Splash", "Swift", "SX4", "SX4 Sedan", "Vitara", "Wagon R+"]
+        },
+        {
+            "brand": "Mercedes-Benz",
+            "models": ["100 D", "115", "124", "126", "190", "190 D", "190 E", "200 - 300", "200 D", "200 E", "210 Van", "210 kombi", "310 Van", "310 kombi", "230 - 300 CE Coupé", "260 - 560 SE", "260 - 560 SEL", "500 - 600 SEC Coupé", "Trieda A", "A", "A L", "AMG GT", "Trieda B", "Trieda C", "C", "C Sportcoupé", "C T", "Citan", "CL", "CL", "CLA", "CLC", "CLK Cabrio", "CLK Coupé", "CLS", "Trieda E", "E", "E Cabrio", "E Coupé", "E T", "Trieda G", "G Cabrio", "GL", "GLA", "GLC", "GLE", "GLK", "Trieda M", "MB 100", "Trieda R", "Trieda S", "S", "S Coupé", "SL", "SLC", "SLK", "SLR", "Sprinter"]
+        },
+        {
+            "brand": "Saab",
+            "models": ["9-3", "9-3 Cabriolet", "9-3 Coupé", "9-3 SportCombi", "9-5", "9-5 SportCombi", "900", "900 C", "900 C Turbo", "9000"]
+        },
+        {
+            "brand": "Audi",
+            "models": ["100", "100 Avant", "80", "80 Avant", "80 Cabrio", "90", "A1", "A2", "A3", "A3 Cabriolet", "A3 Limuzina", "A3 Sportback", "A4", "A4 Allroad", "A4 Avant", "A4 Cabriolet", "A5", "A5 Cabriolet", "A5 Sportback", "A6", "A6 Allroad", "A6 Avant", "A7", "A8", "A8 Long", "Q3", "Q5", "Q7", "R8", "RS4 Cabriolet", "RS4/RS4 Avant", "RS5", "RS6 Avant", "RS7", "S3/S3 Sportback", "S4 Cabriolet", "S4/S4 Avant", "S5/S5 Cabriolet", "S6/RS6", "S7", "S8", "SQ5", "TT Coupé", "TT Roadster", "TTS"]
+        },
+        {
+            "brand": "Kia",
+            "models": ["Avella", "Besta", "Carens", "Carnival", "Cee`d", "Cee`d SW", "Cerato", "K 2500", "Magentis", "Opirus", "Optima", "Picanto", "Pregio", "Pride", "Pro Cee`d", "Rio", "Rio Combi", "Rio sedan", "Sephia", "Shuma", "Sorento", "Soul", "Sportage", "Venga"]
+        },
+        {
+            "brand": "Land Rover",
+            "models": ["109", "Defender", "Discovery", "Discovery Sport", "Freelander", "Range Rover", "Range Rover Evoque", "Range Rover Sport"]
+        },
+        {
+            "brand": "Dodge",
+            "models": ["Avenger", "Caliber", "Challenger", "Charger", "Grand Caravan", "Journey", "Magnum", "Nitro", "RAM", "Stealth", "Viper"]
+        },
+        {
+            "brand": "Chrysler",
+            "models": ["300 C", "300 C Touring", "300 M", "Crossfire", "Grand Voyager", "LHS", "Neon", "Pacifica", "Plymouth", "PT Cruiser", "Sebring", "Sebring Convertible", "Stratus", "Stratus Cabrio", "Town & Country", "Voyager"]
+        },
+        {
+            "brand": "Ford",
+            "models": ["Aerostar", "B-Max", "C-Max", "Cortina", "Cougar", "Edge", "Escort", "Escort Cabrio", "Escort kombi", "Explorer", "F-150", "F-250", "Fiesta", "Focus", "Focus C-Max", "Focus CC", "Focus kombi", "Fusion", "Galaxy", "Grand C-Max", "Ka", "Kuga", "Maverick", "Mondeo", "Mondeo Combi", "Mustang", "Orion", "Puma", "Ranger", "S-Max", "Sierra", "Street Ka", "Tourneo Connect", "Tourneo Custom", "Transit", "Transit", "Transit Bus", "Transit Connect LWB", "Transit Courier", "Transit Custom", "Transit kombi", "Transit Tourneo", "Transit Valnik", "Transit Van", "Transit Van 350", "Windstar"]
+        },
+        {"brand": "Hummer", "models": ["H2", "H3"]},
+        {
+            "brand": "Hyundai",
+            "models": ["Accent", "Atos", "Atos Prime", "Coupé", "Elantra", "Galloper", "Genesis", "Getz", "Grandeur", "H 350", "H1", "H1 Bus", "H1 Van", "H200", "i10", "i20", "i30", "i30 CW", "i40", "i40 CW", "ix20", "ix35", "ix55", "Lantra", "Matrix", "Santa Fe", "Sonata", "Terracan", "Trajet", "Tucson", "Veloster"]
+        },
+        {"brand": "Infiniti", "models": ["EX", "FX", "G", "G Coupé", "M", "Q", "QX"]},
+        {
+            "brand": "Jaguar",
+            "models": ["Daimler", "F-Pace", "F-Type", "S-Type", "Sovereign", "X-Type", "X-type Estate", "XE", "XF", "XJ", "XJ12", "XJ6", "XJ8", "XJ8", "XJR", "XK", "XK8 Convertible", "XKR", "XKR Convertible"]
+        },
+        {
+            "brand": "Jeep",
+            "models": ["Cherokee", "Commander", "Compass", "Grand Cherokee", "Patriot", "Renegade", "Wrangler"]
+        },
+        {
+            "brand": "Nissan",
+            "models": ["100 NX", "200 SX", "350 Z", "350 Z Roadster", "370 Z", "Almera", "Almera Tino", "Cabstar E - T", "Cabstar TL2 Valnik", "e-NV200", "GT-R", "Insterstar", "Juke", "King Cab", "Leaf", "Maxima", "Maxima QX", "Micra", "Murano", "Navara", "Note", "NP300 Pickup", "NV200", "NV400", "Pathfinder", "Patrol", "Patrol GR", "Pickup", "Pixo", "Primastar", "Primastar Combi", "Primera", "Primera Combi", "Pulsar", "Qashqai", "Serena", "Sunny", "Terrano", "Tiida", "Trade", "Vanette Cargo", "X-Trail"]
+        },
+        {
+            "brand": "Volvo",
+            "models": ["240", "340", "360", "460", "850", "850 kombi", "C30", "C70", "C70 Cabrio", "C70 Coupé", "S40", "S60", "S70", "S80", "S90", "V40", "V50", "V60", "V70", "V90", "XC60", "XC70", "XC90"]
+        },
+        {
+            "brand": "Daewoo",
+            "models": ["Espero", "Kalos", "Lacetti", "Lanos", "Leganza", "Lublin", "Matiz", "Nexia", "Nubira", "Nubira kombi", "Racer", "Tacuma", "Tico"]
+        },
+        {
+            "brand": "Fiat",
+            "models": ["1100", "126", "500", "500L", "500X", "850", "Barchetta", "Brava", "Cinquecento", "Coupé", "Croma", "Doblo", "Doblo Cargo", "Doblo Cargo Combi", "Ducato", "Ducato Van", "Ducato Kombi", "Ducato Podvozok", "Florino", "Florino Combi", "Freemont", "Grande Punto", "Idea", "Linea", "Marea", "Marea Weekend", "Multipla", "Palio Weekend", "Panda", "Panda Van", "Punto", "Punto Cabriolet", "Punto Evo", "Punto Van", "Qubo", "Scudo", "Scudo Van", "Scudo Kombi", "Sedici", "Seicento", "Stilo", "Stilo Multiwagon", "Strada", "Talento", "Tipo", "Ulysse", "Uno", "X1/9"]
+        },
+        {
+            "brand": "MINI",
+            "models": ["Cooper", "Cooper Cabrio", "Cooper Clubman", "Cooper D", "Cooper D Clubman", "Cooper S", "Cooper S Cabrio", "Cooper S Clubman", "Countryman", "Mini One", "One D"]
+        },
+        {"brand": "Rover", "models": ["200", "214", "218", "25", "400", "414", "416", "620", "75"]},
+        {
+            "brand": "Smart",
+            "models": ["Cabrio", "City-Coupé", "Compact Pulse", "Forfour", "Fortwo cabrio", "Fortwo coupé", "Roadster"]
+        }]
+    // const settings = {
+    //     "async": true,
+    //     "crossDomain": true,
+    //     "url": "https://vpic.nhtsa.dot.gov/api/vehicles/getallmakes?format=json",
+    //     "method": "GET",
+    //     "headers": {
+    //         "x-bingapis-sdk": "true",
+    //         "Access-Control-Allow-Origin": "*",
+    //         "Access-Control-Allow-Origin": "https://vpic.nhtsa.dot.gov/api/vehicles/getallmakes?format=json"
+    //     }
+    // };
+    // const model = {
+    //     "async": true,
+    //     "crossDomain": true,
+    //     "url": "https://the-vehicles-api.herokuapp.com/models?brandId=17",
+    //     "method": "GET",
+    //     "headers": {
+    //         "x-bingapis-sdk": "true",
+    //         "Access-Control-Allow-Origin": "*",
+    //         "Access-Control-Allow-Origin": "https://the-vehicles-api.herokuapp.com/models?brandId=17"
+    //     }
+    // };
+    // $.ajax(model).done(function (response) {
+    //     console.log(response);
+    //
+    //
+    // });
+    var clicked = false;
+
+    function addCars() {
+        if (!clicked) {
+            console.log(cars)
+            cars.forEach(responseElement => {
+                console.log(1)
+                var o = new Option(responseElement.brand, responseElement.brand);
+                $(o).html(cars.brand);
+                $("#mySelect").append(o);
+                clicked = true;
+            })
+        }
+
+    }
+
+    var brand;
+
+    function selectNum() {
+        var selected = document.getElementById("mySelect").value;
+        console.log(selected)
+        brand = selected;
+    }
+
+    function addCarsModel() {
+        cars.forEach(responseElement => {
+            if (responseElement.brand === brand) {
+
+                $("#model").empty()
+                for (const car of responseElement.models) {
+                    console.log(1)
+                    var o = new Option(car, car);
+                    $(o).html(car);
+                    $("#model").append(o);
+                    clicked = true;
+                }
+
+            }
+
+        })
+    }
+
+    function selectModelNum() {
+        var selected = document.getElementById("model").value;
+        console.log(selected)
+        brand = selected;
+    }
+</script>
+
+
+</body>
+</html>		

@@ -8,10 +8,10 @@
 	<title>Car East</title>
 	<link rel="icon" type="image/png" href="images/fav.png">
 
-	<link rel="stylesheet" href="css/apps.css">
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/color.css">
-	<link rel="stylesheet" href="css/responsive.css">
+	<link rel="stylesheet" href="/css/apps.css">
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/color.css">
+	<link rel="stylesheet" href="/css/responsive.css">
 
 </head>
 <body>
@@ -77,13 +77,13 @@
 									<ul>
 										<li><a href="leasing.html" title="">Leasing Page</a></li>
 										<li><a href="leasing-car-step1.html" title="">leasing Step 1</a></li>
-										<li><a href="leasing-car-step2.html" title="">leasing step 2</a></li>
+										<li><a href="addCar.html" title="">leasing step 2</a></li>
 									</ul>
 								</li>
 								<li><a href="#" title="">Become a partner</a>
 									<ul>
-										<li><a href="/asDriver" title="">As a driver</a></li>
-										<li><a href="/asDealer" title="">As a Dealer</a></li>
+										<li><a href="/registerAsDriver" title="">As a driver</a></li>
+										<li><a href="/registerAsDealer" title="">As a dealer</a></li>
 									</ul>
 								</li>
 								<!--									<li><a href="#" title=""><i class="fa fa-ellipsis-v"></i></a>-->
@@ -154,7 +154,7 @@
 					<ul class="sub-menu">
 						<li><a href="leasing.html" title="">Leasing Page</a></li>
 						<li><a href="leasing-car-step1.html" title="">leasing Step 1</a></li>
-						<li><a href="leasing-car-step2.html" title="">leasing step 2</a></li>
+						<li><a href="addCar.html" title="">leasing step 2</a></li>
 					</ul>
 				</li>
 				<li class="menu-item-has-children"><a href="#" title="">profiles</a>
@@ -216,32 +216,41 @@
 								<div class="col-md-4">
 									<div class="log-with-fb">
 										<h4>Login in seconds:</h4>
-										<a class="facebook" href="#" title=""><i class="fa fa-facebook"></i>facebook</a>
-										<a class="google" href="#" title=""><i class="fa fa-google-plus"></i>Google</a>
-										<a class="twitter" href="#" title=""><i class="fa fa-twitter"></i>Twitter</a>
+										<a class="facebook" href="#" title=""></i>facebook</a>
+										<a class="google" href="#" title=""></i>Google</a>
+										<a class="twitter" href="#" title=""></i>Twitter</a>
 									</div>
 								</div>
 								<div class="offset-lg-1 col-lg-7 col-md-8">
 									<div class="cola-form">
 										<h4><i class="flaticon-sign-in"></i>Register:</h4>
-										<form method="post" action="/driver/registration" enctype="multipart/form-data">
+										<form method="post" action="/driver/register" enctype="multipart/form-data">
+											<div th:if="${errors != null && !errors.isEmpty()}" >
+												<ul>
+													<li style="color: red" th:each="error: ${errors}" th:text="${error}"></li>
+												</ul>
+											</div>
 											<label>Name:</label>
-											<input type="text" name="name">
+											<input type="text" name="name" required>
 											<label>surname:</label>
-											<input type="text" name="surname">
+											<input type="text" name="surname" required>
 											<label>phone number:</label>
-											<input type="text" name="phoneNumber">
+											<input type="text" name="phoneNumber" required>
 											<label>bank account number:</label>
-											<input type="text" name="bankAccountNumber">
+											<input type="text" name="bankAccountNumber" required>
 											<label>Driver Licence id:</label>
-											<input type="text" name="driverLicence">
+											<input type="text" name="driverLicence" required>
 											<label>hourly rate:</label>
-											<input type="number" name="driverHourlyRate">
-
+											<input type="number" name="driverHourlyRate" required>
+											<div th:if="${existUser!=null}" >
+												<ul>
+													<li style="color: red" th:text="${existUser.toUpperCase()}"></li>
+												</ul>
+											</div>
 											<label>email:</label>
-											<input type="text" name="email">
+											<input type="text" name="email" required>
 											<label>password:</label>
-											<input type="password" name="password">
+											<input type="password" name="password" required>
 
 
 

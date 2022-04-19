@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,7 +35,7 @@
                 </div>
             </div>
         </div><!-- topbar -->
-		
+
 		<div class="topbar">
         	<div class="container">
             	<div class="row">
@@ -45,13 +45,19 @@
                                 <a href="index.html" title="index.html"><img src="../images/logo-black.png" alt=""></a>
                             </div>
                             <nav>
-                                <ul class="main-menu">
+
+
+
+								<ul class="main-menu">
                                     <li><a href="index.html" title="">Home</a>
 										<ul>
 											<li><a href="index-after-login.html" title="">page after login</a></li>
 										</ul>
 									</li>
                                     <li><a href="#" title="">cars</a>
+
+
+
 										<ul>
 											<li><a href="cars.html" title="">cars</a></li>
 											<li><a href="car-profile.html" title="">car profile</a></li>
@@ -74,7 +80,7 @@
 										<ul>
 											<li><a href="leasing.html" title="">Leasing Page</a></li>
 											<li><a href="leasing-car-step1.html" title="">leasing Step 1</a></li>
-											<li><a href="leasing-car-step2.html" title="">leasing step 2</a></li>
+											<li><a href="addCar.html" title="">leasing step 2</a></li>
 										</ul>
 									</li>
 									<li><a href="#" title="">profiles</a>
@@ -98,7 +104,7 @@
 											<li><a href="points.html" title="">poinst</a></li>
 											<li><a href="coming-soon.html" title="">Coming Soon</a></li>
 											<li><a href="404.html" title="">404 Page</a></li>
-											
+
 										</ul>
 									</li>
                                 </ul>
@@ -112,7 +118,7 @@
                 </div>
             </div>
         </div><!-- topbar header -->
-        
+
 		<div class="responsive-header">
 			<div class="res-top">
 				<ul>
@@ -126,7 +132,7 @@
 			</div>
 			<div class="logomenu-bar">
 				<div class="logo"><a href="index.html" title=""><img src="../images/logo-black.png" alt=""></a></div>
-				<span class="responsviemenu-btn"><i class="flaticon-menu-1"></i></span> 
+				<span class="responsviemenu-btn"><i class="flaticon-menu-1"></i></span>
 			</div>
 			<div class="responsive-menu">
 				<span class="close-btn"><i class="flaticon-error-1"></i></span>
@@ -156,7 +162,7 @@
 						<ul class="sub-menu">
 							<li><a href="leasing.html" title="">Leasing Page</a></li>
 							<li><a href="leasing-car-step1.html" title="">leasing Step 1</a></li>
-							<li><a href="leasing-car-step2.html" title="">leasing step 2</a></li>
+							<li><a href="addCar.html" title="">leasing step 2</a></li>
 						</ul>
 					</li>
 					<li class="menu-item-has-children"><a href="#" title="">profiles</a>
@@ -185,28 +191,26 @@
 				</ul>
 			</div>
 		</div><!-- Responsive Header -->
-		
+
+		<span th:text="${message}"></span> <br>
+		<font style="size: 70px"><a href="/sign">Sign</a></font>
+
+
+
+
+
         <section>
         	<div class="featured-area">
             	<ul class="featured-caro">
                 	<li><img src="../images/resources/featured-avatar3.jpg" alt=""></li>
                     <li><img src="../images/resources/featured-avatar4.jpg" alt=""></li>
                 </ul>
-                <div class="model-box">
-                	<span class="tag">Most Popular</span>
-                    <h4>Mercedes Benza C5</h4>
-                    <span>12 months</span>
-                    <ul>
-                    	<li>No entry</li>
-                        <li>Insurance Included</li>
-                        <li>Maintenance included</li>
-                    </ul>
-                    <em>Total per month: <i>$20</i></em>
-                    <a href="#" title="" class="theme-btn">see this offer</a>
-                </div>
+
+
+
             </div>
         </section><!-- feature area -->
-        
+
         <section>
         	<div class="space no-bottom">
         		<div class="container">
@@ -222,7 +226,7 @@
 											<h4>no entry required</h4>
 											<p>The car will be in your hands the next day we approve your request for leasing.</p>
 										</div>
-									</div>	
+									</div>
 								</div>
 								<div class="col-lg-6 col-md-6">
 									<div class="points">
@@ -233,7 +237,7 @@
 											<h4>contracts to your measure</h4>
 											<p>We have a lot of types of contracts prepared for you to pick from based on your needs. </p>
 										</div>
-									</div>	
+									</div>
 								</div>
 								<div class="col-lg-6 col-md-6">
 									<div class="points">
@@ -244,7 +248,7 @@
 											<h4>insurance included</h4>
 											<p>You have insurance included in the specific price, the only thing you need to pay for is the gas.</p>
 										</div>
-									</div>	
+									</div>
 								</div>
 								<div class="col-lg-6 col-md-6">
 									<div class="points">
@@ -255,15 +259,15 @@
 											<h4>get ready</h4>
 											<p>You pay your rent comfortably, renting your car when you do not use it.</p>
 										</div>
-									</div>	
+									</div>
 								</div>
-							</div>	
+							</div>
 						</div>
         			</div>
         		</div>
         	</div>
         </section><!-- services section -->
-        
+
         <section>
         	<div class="space gray-bg">
         		<div class="container">
@@ -357,7 +361,7 @@
         		</div>
         	</div>
         </section><!-- rental boxes -->
-        
+
         <section>
         	<div class="space">
         		<div class="container">
@@ -375,7 +379,7 @@
         		</div>
         	</div>
         </section><!-- notice box -->
-        
+
         <footer class="light">
 			<div class="mockup-right">
 				<img src="../images/resources/footer-mockup.png" alt="">
@@ -386,7 +390,7 @@
                     	<div class="widget">
                             <a href="index.html" title=""><img src="../images/logo-black.png" alt=""></a>
                             <p>
-                            	The trio took this simple idea and built it into the world’s leading carpooling platform, connecting millions of people going the same way. 
+                            	The trio took this simple idea and built it into the world’s leading carpooling platform, connecting millions of people going the same way.
                             </p>
 							<ul class="social">
 								<li><a href="#" title="" class="facebook"><i class="fa fa-facebook"></i></a></li>
@@ -440,7 +444,7 @@
 				</div>
 			</div>
         </footer><!-- footer -->
-        
+
         <div class="popup-wraper">
         	<div class="popup nopading">
         		<span class="popup-closed"><i class="flaticon-error-1"></i></span>
@@ -486,11 +490,11 @@
         		</div>
         	</div>
         </div><!-- send message popup -->
-        
+
     </div>
 
 	<script src="../js/apps.min.js"></script>
     <script src="../js/script.js"></script>
-        
-</body>	
+
+</body>
 </html>		
