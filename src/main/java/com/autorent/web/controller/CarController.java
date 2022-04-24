@@ -30,10 +30,6 @@ public class CarController {
     private final CarService carService;
     private final PicturesService picturesService;
 
-    @GetMapping("/addCar")
-    public String addCar() {
-        return "addCar";
-    }
 
     @GetMapping("/cars")
     public String showCars(ModelMap map) {
@@ -41,6 +37,11 @@ public class CarController {
         map.addAttribute("cars", carService.findAll());
         return "cars";
     }
+    @GetMapping("/addCar")
+    public String addCar() {
+        return "addCar";
+    }
+
 
 
     @PostMapping("/saveCar")
@@ -49,6 +50,7 @@ public class CarController {
 
         Car car = mapper.map(createCarRequest, Car.class);
         carService.saveCar(currentUser, car, file);
+        // sufskughfvkshglkvs
 
         return "redirect:/";
     }
