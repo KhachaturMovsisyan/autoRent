@@ -5,6 +5,8 @@ import com.autorent.web.repository.PicturesRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class PicturesService {
@@ -13,5 +15,9 @@ public class PicturesService {
     public void savePics(Pictures pictures) {
         picturesRepository.save(pictures);
 
+    }
+
+    public List<Pictures> findAll() {
+        return picturesRepository.findAll();
     }
 }

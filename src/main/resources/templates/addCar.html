@@ -66,28 +66,7 @@
                             </li>
                         </ul>
                     </div>
-                    <!--						<div class="login-area"  th:if="${currentUser!=null}">-->
-                    <!--							<ul>-->
-                    <!--								<div style="float: right; margin-right: 50px">-->
-                    <!--									<li class="log-in" style="margin-right: 50px" >-->
-                    <!--										<a href="#" title="">-->
-                    <!--											<img src="../images/resources/login-avatar.jpg" alt="">-->
-                    <!--										</a>-->
-                    <!--										<div class="login-dropdown">-->
-                    <!--											<span></span>-->
-                    <!--											<a href="#" title="">see profile</a>-->
-                    <!--											<ul>-->
-                    <!--												<li><a href="#" title="">points <span class="badge">0</span></a></li>-->
-                    <!--												<li><a href="#" title="">cars</a></li>-->
-                    <!--												<li><a href="#" title="">balance</a></li>-->
-                    <!--												<li><a href="#" title="">earning</a></li>-->
-                    <!--												<li class="signout"><a href="#" title="">sign out <i class="fa fa-power-off"></i></a></li>-->
-                    <!--											</ul>-->
-                    <!--										</div>-->
-                    <!--								</div>-->
-                    <!--									</li>-->
-                    <!--							</ul>-->
-                    <!--						</div>-->
+
                 </div>
 
 
@@ -161,88 +140,69 @@
                         <div class="leasing-car">
                             <div class="row">
                                 <div class="col-lg-6 col-md-7">
-
-                                    <div class="offset-lg-1 col-lg-7 col-md-7">
-                                        <div class="cola-form">
+                                    <div class="cola-form">
                                             <h4><i class="flaticon-sign-in"></i>Add Car:</h4>
-                                            <form method="post" action="/saveCar" enctype="multipart/form-data">
+                                            <form method="post" action="/saveCar" enctype="multipart/form-data" style="display: flex; flex-direction: column">
 
                                                 <h5>Options:</h5><br>
 
-
-                                                <label>Mark:</label>
-                                                <select style="width: 500px" class="nice-select" name="mark"
-                                                        id="mySelect" onclick="addCars()"
-                                                        onchange="selectNum()">
-                                                    <option value="avto">chose car</option>
-                                                </select>
-
-                                                <span>Model:</span>
-                                                <select style="width: 500px" class="nice-select" name="model" id="model"
-                                                        onclick="addCarsModel()"
-                                                        onchange="selectModelNum()">
-                                                    <option value="avto">chose model</option>
-                                                </select> <br>
-
-                                                <span>Body Style:</span>
-                                                <select style="width: 500px" class="nice-select" name="CategoryType">
-                                                    <option th:each="body : ${T(com.autorent.web.entity.CategoryType).values()}"
-                                                            th:value="${body}" th:text="${body}">chose body style
-                                                    </option>
-                                                </select> <br>
-
-
-                                                <span>Car Year:</span>
-                                                <select style="width: 500px" class="nice-select" name="carModelYear">
-                                                    <option>year</option>
-                                                    <option>1999</option>
-                                                    <option>2000</option>
-                                                    <option>2001</option>
-                                                    <option>2002</option>
-                                                    <option>2003</option>
-                                                    <option>2004</option>
-                                                    <option>2005</option>
-                                                    <option>2006</option>
-                                                    <option>2007</option>
-                                                    <option>2008</option>
-                                                    <option>2009</option>
-                                                    <option>2010</option>
-                                                    <option>2011</option>
-                                                    <option>2012</option>
-                                                    <option>2013</option>
-                                                    <option>2014</option>
-                                                    <option>2015</option>
-                                                    <option>2016</option>
-                                                    <option>2017</option>
-                                                    <option>2018</option>
-                                                    <option>2019</option>
-                                                    <option>2020</option>
-                                                    <option>2021</option>
-                                                    <option>2022</option>
-                                                </select>
-
-                                                <br>
-                                                <span>Price Per Day:</span>
-                                                <input style="width: 500px" class="nice-select"
-                                                       type="number" name="pricePerDay" required placeholder="0"><br>
-
-
-                                                <span>Description:</span>
-                                                <textarea style="width: 500px; height: 170px" class="nice-select"
-                                                          type="text" name="Description" required> </textarea><br>
-
-
-                                                <span>Picture:</span>
-                                                <div class="dp-edit">
-                                                    <input type="file" name="images" multiple/><br>
+                                                <div class="mark-car">
+                                                    <label>Mark:</label>
+                                                    <select style="width: 500px" class="nice-select" name="mark"
+                                                            id="mySelect" onclick="addCars()"
+                                                            onchange="selectNum()">
+                                                        <option value="avto">choose car</option>
+                                                    </select>
                                                 </div>
+                                                <div class="model">
+                                                    <label>Model:</label>
+                                                    <select style="width: 500px" class="nice-select" name="model" id="model"
+                                                            onclick="addCarsModel()"
+                                                            onchange="selectModelNum()">
+                                                        <option value="avto">choose model</option>
+                                                    </select>
+                                                </div>
+                                                <div class="body">
+                                                    <label>Body Style:</label>
+                                                    <select style="width: 500px" class="nice-select" name="CategoryType">
+                                                        <option th:each="body : ${T(com.autorent.web.entity.CategoryType).values()}"
+                                                                th:value="${body}" th:text="${body}">chose body style
+                                                        </option>
+                                                    </select>
 
+                                                </div>
+                                                <div class="year">
+                                                    <label>Car Year:</label>
+                                                    <select  style="width: 500px" class="nice-select" name="carModelYear">
+                                                        <th:block th:each="i: ${#numbers.sequence(2022, 1999)}">
+                                                            <option th:text="${i}"></option>
+                                                        </th:block>
 
+                                                    </select>
+
+                                                </div>
+                                                <div class="price">
+                                                    <label>Price Per Day:</label>
+                                                    <input style="width: 500px" class="nice-select"
+                                                           type="number" name="pricePerDay" required placeholder="0"><br>
+
+                                                </div>
+                                                <div class="description">
+                                                    <label>Description:</label>
+                                                    <textarea style="width: 500px; height: 170px;white-space: pre-wrap;line-height: 15px;" class="nice-select"
+                                                              type="text" name="Description" required> </textarea><br>
+                                                </div>
+                                                <div class="picture">
+                                                    <label>Picture:</label>
+                                                    <div class="dp-edit">
+                                                        <input type="file" name="images" multiple/><br>
+                                                    </div>
+                                                </div>
                                                 <button type="submit" class="theme-btn">Add Car</button>
                                             </form>
                                             <!--                                            <span>Are you a member already? <a href="/sign" title="">Login here</a></span>-->
                                         </div>
-                                    </div>
+
 
 
                                 </div>
@@ -273,8 +233,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+
     </section><!-- form section -->
 
     <footer class="light">
@@ -498,33 +457,7 @@
             "brand": "Smart",
             "models": ["Cabrio", "City-Coupé", "Compact Pulse", "Forfour", "Fortwo cabrio", "Fortwo coupé", "Roadster"]
         }]
-    // const settings = {
-    //     "async": true,
-    //     "crossDomain": true,
-    //     "url": "https://vpic.nhtsa.dot.gov/api/vehicles/getallmakes?format=json",
-    //     "method": "GET",
-    //     "headers": {
-    //         "x-bingapis-sdk": "true",
-    //         "Access-Control-Allow-Origin": "*",
-    //         "Access-Control-Allow-Origin": "https://vpic.nhtsa.dot.gov/api/vehicles/getallmakes?format=json"
-    //     }
-    // };
-    // const model = {
-    //     "async": true,
-    //     "crossDomain": true,
-    //     "url": "https://the-vehicles-api.herokuapp.com/models?brandId=17",
-    //     "method": "GET",
-    //     "headers": {
-    //         "x-bingapis-sdk": "true",
-    //         "Access-Control-Allow-Origin": "*",
-    //         "Access-Control-Allow-Origin": "https://the-vehicles-api.herokuapp.com/models?brandId=17"
-    //     }
-    // };
-    // $.ajax(model).done(function (response) {
-    //     console.log(response);
-    //
-    //
-    // });
+
     var clicked = false;
 
     function addCars() {
