@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -32,8 +33,11 @@ public class Car {
     @Enumerated(EnumType.STRING)
     private StatusType statusType;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
+
+    @OneToMany
+    private List<Pictures> carPictures;
 
 
 

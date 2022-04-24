@@ -23,4 +23,7 @@ public class Pictures {
     @ManyToOne
     private Car car;
 
+
+
+
 }

@@ -50,14 +50,6 @@ public class UserController {
 
 
 
-
-    @GetMapping(value = "/getImage", produces = MediaType.IMAGE_JPEG_VALUE)
-    public @ResponseBody byte[] getImage(@RequestParam("picName") String picName) throws IOException {
-        InputStream inputStream = new FileInputStream(imagePath + picName);
-        return IOUtils.toByteArray(inputStream);
-    }
-
-
     @GetMapping("/user/activate")
     public String activateUser(ModelMap map, @RequestParam String token)  {
         User userFromDb = userService.findByToken(token).orElseThrow(UserNotFoundException::new);
