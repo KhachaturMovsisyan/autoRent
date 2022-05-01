@@ -11,6 +11,7 @@ import com.autorent.web.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.IOUtils;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -33,9 +34,6 @@ import java.util.Locale;
 @RequiredArgsConstructor
 public class UserController {
 
-
-    @Value("${image.upload.path}")
-    private String imagePath;
 
     private final UserService userService;
     private final ModelMapper mapper;

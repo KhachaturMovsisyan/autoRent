@@ -7,13 +7,11 @@ import com.autorent.web.service.CarService;
 import com.autorent.web.service.PicturesService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.mail.MessagingException;
@@ -23,7 +21,6 @@ import java.io.IOException;
 @Controller
 @RequiredArgsConstructor
 public class CarController {
-
 
 
     private final ModelMapper mapper;
@@ -37,11 +34,11 @@ public class CarController {
         map.addAttribute("cars", carService.findAll());
         return "cars";
     }
+
     @GetMapping("/addCar")
     public String addCar() {
         return "addCar";
     }
-
 
 
     @PostMapping("/saveCar")
@@ -50,9 +47,14 @@ public class CarController {
 
         Car car = mapper.map(createCarRequest, Car.class);
         carService.saveCar(currentUser, car, file);
-        // sufskughfvkshglkvs
 
         return "redirect:/";
+    }
+
+    @GetMapping("/cars/{id}")
+    public String singleItem(@PathVariable int id, ModelMap map) {
+        map.addAttribute("car", carService.findById(id));
+        return "car-detail";
     }
 
 

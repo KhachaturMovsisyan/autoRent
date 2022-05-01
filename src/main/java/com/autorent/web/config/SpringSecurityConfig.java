@@ -16,7 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
+
     private UserDetailsImpl userDetails;
 
     @Override
@@ -32,7 +32,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureUrl("/sign?error=true")
                 .and()
                 .authorizeRequests()
-                .antMatchers("/css/**","/js/**","/images/**").permitAll()
+                .antMatchers("/css/**", "/js/**", "/images/**").permitAll()
                 .and()
                 .logout()
                 .logoutUrl("/logout")
@@ -42,7 +42,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/addCar").hasAuthority(UserType.DEALER.name())
-                .antMatchers(HttpMethod.GET,"/profile").authenticated()
+                .antMatchers(HttpMethod.GET, "/profile").authenticated()
                 .anyRequest().permitAll();
 
     }
@@ -78,4 +78,3 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 }
 
 
-//

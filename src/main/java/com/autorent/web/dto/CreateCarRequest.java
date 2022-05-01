@@ -20,6 +20,8 @@ public class CreateCarRequest {
     private String model;
     @NotBlank(message = "description is empty")
     private String description;
+    @NotBlank(message = "details is empty")
+    private String details;
     @NotNull
     private double pricePerDay;
     private String carModelYear;

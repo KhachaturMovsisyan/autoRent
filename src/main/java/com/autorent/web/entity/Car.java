@@ -1,10 +1,7 @@
 package com.autorent.web.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -23,6 +20,7 @@ public class Car {
     private int Id;
     private String model;
     private String description;
+    private String details;
     private double pricePerDay;
     private String carModelYear;
     private String  Mark;
@@ -36,7 +34,8 @@ public class Car {
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
-    @OneToMany
+    @OneToMany(mappedBy = "car")
+    @ToString.Exclude
     private List<Pictures> carPictures;
 
 

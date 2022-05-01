@@ -1,26 +1,19 @@
-package com.autorent.web.entity;
+package com.autorent.web.dto;
 
-
+import com.autorent.web.entity.Car;
+import com.autorent.web.entity.User;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.ManyToOne;
 import java.util.Date;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Entity
-@Table(name = "order")
-public class Order {
+@NoArgsConstructor
+public class CreateOrderRequest {
 
-
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    private int Id;
     private Date startDate;
     private Date endDate;
 
@@ -31,4 +24,5 @@ public class Order {
     private User user;
     @ManyToOne
     private User driver;
+
 }

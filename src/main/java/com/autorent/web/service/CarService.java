@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -41,19 +42,23 @@ public class CarService {
     private void saveCarImages(MultipartFile[] uploadedFiles, Car car) throws IOException {
         if (uploadedFiles.length != 0) {
             for (MultipartFile uploadedFile : uploadedFiles) {
-                String fileName = System.nanoTime() + "_" + uploadedFile.getOriginalFilename();
-                File newFile = new File(imagePath + fileName);
-                uploadedFile.transferTo(newFile);
-                Pictures pictures = Pictures.builder()
-                        .picUrl(fileName)
-                        .car(car)
-                        .build();
+                if (!uploadedFile.isEmpty()) {
+                    String fileName = System.nanoTime() + "_" + uploadedFile.getOriginalFilename();
+                    File newFile = new File(imagePath + fileName);
+                    uploadedFile.transferTo(newFile);
+                    Pictures pictures = Pictures.builder()
+                            .picUrl(fileName)
+                            .car(car)
+                            .build();
 
-                picturesService.savePics(pictures);
-
+                    picturesService.savePics(pictures);
+                }
             }
-
         }
+    }
+
+    public Optional<Car> findById(int id) {
+        return carRepository.findById(id);
     }
 }
 
