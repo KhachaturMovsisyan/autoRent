@@ -8,6 +8,7 @@ import com.autorent.web.service.PicturesService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.mail.MessagingException;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.Collection;
 
 @Controller
 @RequiredArgsConstructor
@@ -47,6 +49,8 @@ public class CarController {
 
         Car car = mapper.map(createCarRequest, Car.class);
         carService.saveCar(currentUser, car, file);
+
+
 
         return "redirect:/";
     }

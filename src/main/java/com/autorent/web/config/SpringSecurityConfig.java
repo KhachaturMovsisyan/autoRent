@@ -2,6 +2,7 @@ package com.autorent.web.config;
 
 import com.autorent.web.entity.UserType;
 import com.autorent.web.security.UserDetailsImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -16,7 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
-
+    @Autowired
     private UserDetailsImpl userDetails;
 
     @Override
