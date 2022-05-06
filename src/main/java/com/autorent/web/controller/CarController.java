@@ -7,8 +7,8 @@ import com.autorent.web.service.CarService;
 import com.autorent.web.service.PicturesService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,7 +18,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.mail.MessagingException;
 import javax.validation.Valid;
 import java.io.IOException;
-import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 @RequiredArgsConstructor
@@ -31,9 +33,23 @@ public class CarController {
 
 
     @GetMapping("/cars")
-    public String showCars(ModelMap map) {
+    public String showCars(ModelMap map,
+                           @RequestParam(value = "page", defaultValue = "0") int page,
+                           @RequestParam(value = "size", defaultValue = "6") int size) {
+
+        PageRequest pageRequest = PageRequest.of(page, size);
+        Page<Car> carPage = carService.findAll(pageRequest);
+        map.addAttribute("carPage", carPage);
+
+        int totalPages = carPage.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            map.addAttribute("pageNumbers", pageNumbers);
+        }
+
         map.addAttribute("pictures", picturesService.findAll());
-        map.addAttribute("cars", carService.findAll());
         return "cars";
     }
 
@@ -49,9 +65,6 @@ public class CarController {
 
         Car car = mapper.map(createCarRequest, Car.class);
         carService.saveCar(currentUser, car, file);
-
-
-
         return "redirect:/";
     }
 
@@ -60,6 +73,10 @@ public class CarController {
         map.addAttribute("car", carService.findById(id));
         return "car-detail";
     }
+
+
+
+
 
 
 }

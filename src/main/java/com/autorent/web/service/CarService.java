@@ -7,6 +7,8 @@ import com.autorent.web.repository.CarRepository;
 import com.autorent.web.security.CurrentUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -39,6 +41,23 @@ public class CarService {
         return carRepository.findAll();
     }
 
+
+
+    public Page<Car> findAll(Pageable pageable) {
+        return carRepository.findAll(pageable);
+    }
+
+//    public List<Car> findLast10(){
+//
+//        return carRepository.findTop3ByOrderByIdDesc();
+//
+//    }
+
+
+    public Optional<Car> findById(int id) {
+        return carRepository.findById(id);
+    }
+
     private void saveCarImages(MultipartFile[] uploadedFiles, Car car) throws IOException {
         if (uploadedFiles.length != 0) {
             for (MultipartFile uploadedFile : uploadedFiles) {
@@ -55,10 +74,6 @@ public class CarService {
                 }
             }
         }
-    }
-
-    public Optional<Car> findById(int id) {
-        return carRepository.findById(id);
     }
 }
 

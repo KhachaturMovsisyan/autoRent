@@ -39,7 +39,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserType userType;
 
-
-
+    @Enumerated(EnumType.STRING)
+    private UserBusy userBusy;
 
 }

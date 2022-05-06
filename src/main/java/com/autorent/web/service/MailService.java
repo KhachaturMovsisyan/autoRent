@@ -36,7 +36,7 @@ public class MailService {
 
         final String htmlContent = templateEngine.process(templateName, ctx);
 
-        // Prepare message using a Spring helper
+
         final MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         final MimeMessageHelper message =
                 new MimeMessageHelper(mimeMessage, true, "UTF-8"); // true = multipart

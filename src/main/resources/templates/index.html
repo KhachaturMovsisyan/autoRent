@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="" />
     <meta name="keywords" content="" />
-	<title>Car Carry</title>
+	<title>Auto Rent</title>
     <link rel="icon" type="image/png" href="../images/fav.png">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -60,7 +60,7 @@
 
 									<div class="login-dropdown">
 										<span th:text="${currentUser.getUser().getName()}"></span>
-										<a href="" title="">see profile</a>
+										<a th:href="@{'/user/' + ${currentUser.getUser().id}}" title="">see profile</a>
 										<ul>
 											<li class="signout"><a href="/logout" title="">sign out <i class="fa fa-power-off"></i></a></li>
 										</ul>
@@ -68,28 +68,6 @@
 								</li>
 							</ul>
 						</div>
-<!--						<div class="login-area"  th:if="${currentUser!=null}">-->
-<!--							<ul>-->
-<!--								<div style="float: right; margin-right: 50px">-->
-<!--									<li class="log-in" style="margin-right: 50px" >-->
-<!--										<a href="#" title="">-->
-<!--											<img src="../images/resources/login-avatar.jpg" alt="">-->
-<!--										</a>-->
-<!--										<div class="login-dropdown">-->
-<!--											<span></span>-->
-<!--											<a href="#" title="">see profile</a>-->
-<!--											<ul>-->
-<!--												<li><a href="#" title="">points <span class="badge">0</span></a></li>-->
-<!--												<li><a href="#" title="">cars</a></li>-->
-<!--												<li><a href="#" title="">balance</a></li>-->
-<!--												<li><a href="#" title="">earning</a></li>-->
-<!--												<li class="signout"><a href="#" title="">sign out <i class="fa fa-power-off"></i></a></li>-->
-<!--											</ul>-->
-<!--										</div>-->
-<!--								</div>-->
-<!--									</li>-->
-<!--							</ul>-->
-<!--						</div>-->
 					</div>
 
 
@@ -104,7 +82,7 @@
                 	<div class="col-md-12">
                         <header>
                             <div class="logo">
-                                <a href="index.html" title="index.html"><img src="../images/logo-black.png" alt=""></a>
+                                <a href="/" title="index.html"><img src="../images/logo-black.png" alt=""></a>
                             </div>
                             <nav>
                                 <ul class="main-menu">
@@ -114,7 +92,7 @@
 									</li>
                                     <li><a href="#" title="">Term and Policy</a>
 									</li>
-									<li><a href="#" title="">About Us</a>
+									<li><a href="/about" title="">About Us</a>
 									</li>
 									<li th:if="${currentUser == null}"><a href="#" title="">Become a partner</a>
 										<ul>
@@ -124,7 +102,7 @@
 									</li>
 									<li th:if="${currentUser != null}"><a href="#" title="">My Profile</a>
 										<ul>
-											<li><a href="leasing.html" title="">See Profile</a></li>
+											<li><a th:href="@{'/user/' + ${currentUser.getUser().id}}"  title="">See Profile</a></li>
 											<li th:if="${currentUser.getUser().getUserType().name()=='DEALER'}"><a href="/addCar" title="">Add Cars</a></li>
 											<li th:if="${currentUser.getUser().getUserType().name()=='USER'}"><a href="leasing-car-step1.html" title="">User</a></li>
 										</ul>
@@ -182,7 +160,7 @@
 					</li>
 					<li class="menu-item-has-children"><a href="#" title="">leasing</a>
 						<ul class="sub-menu">
-							<li><a href="leasing.html" title="">Leasing Page</a></li>
+							<li><a href="orderPage.html" title="">Leasing Page</a></li>
 							<li><a href="leasing-car-step1.html" title="">leasing Step 1</a></li>
 							<li><a href="addCar.html" title="">leasing step 2</a></li>
 						</ul>
@@ -473,37 +451,7 @@
 				</div>
 			</div><!-- END REVOLUTION SLIDER -->
 		</div>				
-                <div class="featured-meta">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-8">
-                                <div class="cola-topmeta">
-                                	<div class="colaroute-search">
-                                    	<div class="colla-select">
-                                        	<a class="active" href="#" title="">i m' a driver</a>
-                                            <a href="#" title="">i need a lift</a>
-                                        </div>
-                                        <form method="post">
-                                        	<input name="from" id="from" type="text" placeholder="Driving from">
-                                        	<input name="to" id="to" type="text" placeholder="Going to">
-                                            <button type="submit">go!</button>
-                                        </form>
-                                    </div>
-                                </div>	
-                            </div>
-							<div class="col-lg-4">
-								<div class="cola-submition">
-									<ul>
-										<li><a class="theme-btn" href="#" title=""><i class="fa fa-car"></i>submit your car</a></li>
-										<li><a class="theme-btn" href="#" title=""><i class="fa fa-road"></i>submit your route</a></li>
-									</ul>
-									<span><i class="fa fa-smile-o"></i>Earn Car Carry points today! <a href="#" title="">learn more</a></span>
-								</div>
-							</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+			</div>
         </section><!-- featured area section -->
 
         <section>

@@ -83,7 +83,7 @@
 					<div class="col-md-12">
 						<header>
 							<div class="logo">
-								<a href="index.html" title="index.html"><img src="../images/logo-black.png" alt=""></a>
+								<a href="/" title="index.html"><img src="../images/logo-black.png" alt=""></a>
 							</div>
 							<nav>
 								<ul class="main-menu">
@@ -103,11 +103,9 @@
 									</li>
 									<li th:if="${currentUser != null}"><a href="#" title="">My Profile</a>
 										<ul>
-											<li><a href="leasing.html" title="">See Profile</a></li>
-											<li th:if="${currentUser.getUser().getUserType().name()=='DEALER'}"><a
-													href="/addCar" title="">Add Cars</a></li>
-											<li th:if="${currentUser.getUser().getUserType().name()=='USER'}"><a
-													href="leasing-car-step1.html" title="">User</a></li>
+											<li><a th:href="@{'/user/' + ${currentUser.getUser().id}}"  title="">See Profile</a></li>
+											<li th:if="${currentUser.getUser().getUserType().name()=='DEALER'}"><a href="/addCar" title="">Add Cars</a></li>
+											<li th:if="${currentUser.getUser().getUserType().name()=='USER'}"><a href="leasing-car-step1.html" title="">User</a></li>
 										</ul>
 									</li>
 								</ul>
@@ -156,28 +154,28 @@
                         <div class="col-lg-5">
 							<div class="sidebar right">
 								<div class="pickup-time">
-									<div class="date-n-time">
-										<p>
-											<input id="datetimepicker1" type="text" placeholder="Start day" >
-										</p>
-										<p>
+<!--									<div class="date-n-time">-->
+<!--										<p>-->
+<!--											<input id="datetimepicker1" type="text" placeholder="Start day" >-->
+<!--										</p>-->
+<!--										<p>-->
 
-											<input id="datetimepicker2" type="text"  placeholder="datetime">
-										</p>
-										<p>
+<!--											<input id="datetimepicker2" type="text"  placeholder="datetime">-->
+<!--										</p>-->
+<!--										<p>-->
 
-											<input id="datetimepicker3" type="text" placeholder="end day">
-										</p>
-										<p>
+<!--											<input id="datetimepicker3" type="text" placeholder="end day">-->
+<!--										</p>-->
+<!--										<p>-->
 
-											<input id="datetimepicker4" type="text" placeholder="end time">
-										</p>
-									</div>
+<!--											<input id="datetimepicker4" type="text" placeholder="end time">-->
+<!--										</p>-->
+<!--									</div>-->
                                     <ins>$</ins>
 									<ins th:text="${car.get().pricePerDay}"></ins>
 									<span>Price per day</span>
 
-									<a href="#" title="" class="theme-btn">+ book this car now</a>
+									<a th:href="@{'/order/' + ${car.get().id}}" title="" class="theme-btn">+ book this car now</a>
 									<p>
 										Have a great ride with this <span th:text="${car.get().mark}"></span>
 										<span th:text="${car.get().model}"></span>
@@ -230,7 +228,7 @@
             	<div class="row">
                 	<div class="col-lg-4 col-sm-6">
                     	<div class="widget">
-                            <a href="index.html" title=""><img src="../images/logo-black.png" alt=""></a>
+                            <a href="/" title=""><img src="../images/logo-black.png" alt=""></a>
                             <p>
                             	The trio took this simple idea and built it into the world’s leading carpooling platform, connecting millions of people going the same way.
                             </p>

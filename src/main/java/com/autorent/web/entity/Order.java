@@ -24,11 +24,16 @@ public class Order {
     private Date startDate;
     private Date endDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Car car;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private User driver;
+
+    private double cost;
+
+    @Enumerated(EnumType.STRING)
+    private PaymentType paymentType;
 }

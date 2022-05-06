@@ -29,6 +29,12 @@ public class MainController {
         return "index";
     }
 
+    @GetMapping("/about")
+    public String about() {
+        return "redirect:" + "https://vk.com/wall-111905078_11972";
+    }
+
+
     @GetMapping("/sign")
     public String login(@RequestParam(required = false) boolean error, ModelMap map) {
         map.addAttribute("error", error);
