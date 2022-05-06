@@ -1,6 +1,7 @@
 package com.autorent.web.service;
 
 import com.autorent.web.entity.User;
+import com.autorent.web.entity.UserBusy;
 import com.autorent.web.entity.UserType;
 import com.autorent.web.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -30,6 +32,10 @@ public class UserService {
         setTokenAndTimeWithEncode(user, file);
         user.setUserType(UserType.USER);
         return userRepository.save(user);
+    }
+
+    public List<User> drivers(){
+        return userRepository.findUsersByUserTypeAndUserBusy(UserType.DRIVER, UserBusy.FREE);
     }
 
    
@@ -87,4 +93,7 @@ public class UserService {
     }
 
 
+    public User findById(int id) {
+        return userRepository.findById(id).get();
+    }
 }

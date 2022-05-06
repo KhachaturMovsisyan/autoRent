@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content=""/>
     <meta name="keywords" content=""/>
-    <title>Car East</title>
+    <title>Auto Rent</title>
     <link rel="icon" type="image/png" href="../images/fav.png">
 
     <link rel="stylesheet" href="../css/apps.css">
@@ -81,7 +81,7 @@
                 <div class="col-md-12">
                     <header>
                         <div class="logo">
-                            <a href="index.html" title="index.html"><img src="../images/logo-black.png" alt=""></a>
+                            <a href="/" title="index.html"><img src="../images/logo-black.png" alt=""></a>
                         </div>
                         <nav>
                             <ul class="main-menu">
@@ -97,6 +97,15 @@
                                     <ul>
                                         <li><a href="/registerAsDriver" title="">As a driver</a></li>
                                         <li><a href="/registerAsDealer" title="">As a dealer</a></li>
+                                    </ul>
+                                </li>
+                                <li th:if="${currentUser != null}"><a href="#" title="">My Profile</a>
+                                    <ul>
+                                        <li><a href="orderPage.html" title="">See Profile</a></li>
+                                        <li th:if="${currentUser.getUser().getUserType().name()=='DEALER'}"><a
+                                                href="/addCar" title="">Add Cars</a></li>
+                                        <li th:if="${currentUser.getUser().getUserType().name()=='USER'}"><a
+                                                href="leasing-car-step1.html" title="">User</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -216,22 +225,6 @@
                                         <figure>
                                             <img src="images/resources/car.png" alt="">
                                         </figure>
-                                        <div class="request-box">
-                                            <span><i>car</i><em>Mercedes Benz GLA-Class</em></span>
-                                            <span><i>Per month:</i> <ins>$299</ins></span>
-                                            <!--                                            <a href="#" title="" class="theme-btn">+ send the request</a>-->
-                                            <p>Offer subject to availability.</p>
-                                        </div>
-                                        <ul class="contact-links">
-                                            <li><i class="fa fa-long-arrow-right"></i>Any question? Check our <a
-                                                    href="#" title="">FAQs</a> page.
-                                            </li>
-                                            <li><i class="fa fa-long-arrow-right"></i>Email us at <a href="#" title="">Car
-                                                <span class="__cf_email__"
-                                                      data-cfemail="4f0a2e3c3b0f2c20213b2e2c3b612c2022">[email&#160;protected]</span></a>
-                                            </li>
-                                            <li><i class="fa fa-long-arrow-right"></i>Call us at (012) 345 - 6789</li>
-                                        </ul>
                                     </div>
                                 </div>
                             </div>

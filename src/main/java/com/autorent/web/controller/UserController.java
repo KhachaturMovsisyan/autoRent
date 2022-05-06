@@ -14,6 +14,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -29,6 +30,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -50,10 +52,31 @@ public class UserController {
 
     @GetMapping("/user/activate")
     public String activateUser(ModelMap map, @RequestParam String token)  {
-        User userFromDb = userService.findByToken(token).orElseThrow(UserNotFoundException::new);
+        Optional<User> user = userService.findByToken(token);
+
+        if (!user.isPresent()) {
+
+            map.addAttribute("message", "User does not exist");
+            return "activationPage";
+        }
+        User userFromDb = user.get();
+        if (userFromDb.isActive()) {
+
+            map.addAttribute("message", "Your account is activated");
+            return "activationPage";
+        }
         userService.activateUser(userFromDb);
-        map.addAttribute("message", "User activated, please login!");
-        return "activationPage";
+
+        map.addAttribute("message", "Your account has already activated");
+        return "redirect:/";
+    }
+
+
+
+    @GetMapping("/user/{id}")
+    public String userPage(@PathVariable int id, ModelMap map) {
+        map.addAttribute("user",userService.findById(id));
+        return "my-profile";
     }
 
 
@@ -98,6 +121,7 @@ public class UserController {
 
         if (bindingResult.hasErrors()) {
             modelMap.addAttribute("errors", getVerifiedErrors(bindingResult));
+
             return "asDriver";
         } else {
             if (userService.getUserByUserName(createDriverRequest.getEmail()).isPresent()) {
@@ -106,6 +130,7 @@ public class UserController {
             } else {
                 User user = mapper.map(createDriverRequest, User.class);
                 user.setUserType(UserType.DRIVER);
+                user.setActive(false);
                 userService.driverSave(user, file);
                 mailService.sendHtmlEmail(user.getEmail(),
                         "Welcome " + user.getSurname(),

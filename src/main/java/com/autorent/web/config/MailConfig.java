@@ -26,7 +26,6 @@ public class MailConfig {
     @Bean
     public TemplateEngine emailTemplateEngine() {
         final SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-        // Resolver for TEXT emails
         templateEngine.addTemplateResolver(textTemplateResolver());
         templateEngine.setTemplateEngineMessageSource(emailMessageSource());
         return templateEngine;
