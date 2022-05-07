@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <title>Auto Rent</title>
+    <link rel="icon" type="image/png" href="../images/fav.png">
+
+    <link rel="stylesheet" href="../css/apps.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/color.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <style>
+        .pickup-time {
+            background: #f4f8ff none repeat scroll 0 0;
+            -webkit-border-radius: 5px 5px 0 0;
+            -moz-border-radius: 5px 5px 0 0;
+            -ms-border-radius: 5px 5px 0 0;
+            -o-border-radius: 5px 5px 0 0;
+            border-radius: 5px 5px 0 0;
+            float: left;
+            padding: 34px 40px 20px;
+            width: 100%;
+        }
+
+        .pickup-time .date-n-time {
+            padding: 0;
+        }
+
+        .pickup-time .date-n-time > p {
+            margin-bottom: 20px;
+            width: 49.4%;
+        }
+
+        .pickup-time .date-n-time > p input {
+            padding: 10px 40px;
+            width: 100%;
+        }
+
+        .pickup-time > span,
+        .price > span {
+            display: inline-block;
+            font-size: 15px;
+            font-weight: 400;
+            vertical-align: middle;
+            width: 50%;
+            line-height: 44px;
+            text-transform: capitalize;
+        }
+
+        .pickup-time > ins,
+        .price > ins {
+            float: left;
+            font-size: 30px;
+            margin-right: 15px;
+            -webkit-text-decoration: none;
+            -moz-text-decoration: none;
+            -ms-text-decoration: none;
+            -o-text-decoration: none;
+            text-decoration: none;
+        }
+
+        .pickup-time .theme-btn {
+            margin-top: 20px;
+            text-align: center;
+            width: 100%;
+            text-transform: capitalize;
+        }
+
+        .pickup-time > p {
+            font-size: 14px;
+            line-height: 24px;
+            padding-top: 20px;
+            text-align: center;
+        }
+
+        .pickup-time > p > i {
+            color: #bfc7d8;
+        }
+
+        .pickup-time > p,
+        .point-promo > p {
+            font-size: 14px;
+            line-height: 24px;
+            padding-top: 20px;
+            text-align: center;
+        }
+
+        .pickup-time > p > i {
+            color: #bfc7d8;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .text-info {
+            color: #31708f;
+        }
+
+        .physicianList ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .physicianList ul li {
+            display: inline-block;
+            width: 240px;
+            float: left;
+            margin-right: 15px;
+            margin-bottom: 15px;
+        }
+
+        .physicianBox {
+            border: 1px solid #ddd;
+            color: #333;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 20px;
+            background-color: #f5f5f5;
+
+        }
+
+        .physicianBox .physicianPic {
+            padding: 15px 0;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .physicianBox .physicianPic img {
+            border: 6px solid #f8f8f8;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+            transition: all 0.3s ease 0s;
+            margin: 0 auto;
+            height: 120px;
+            width: 120px;
+        }
+
+        .physicianInfo {
+            padding: 10px;
+            text-align: center;
+            border-top: 1px solid #eee;
+        }
+
+        .physicianInfo h6 {
+            font-size: 16px;
+            margin: 0;
+        }
+
+        .physicianBox strong {
+            color: #444;
+        }
+
+        .physicianBox p {
+            font-size: 13px;
+            margin: 0;
+            line-height: 22px;
+        }
+
+        .physicianBio {
+            position: absolute;
+            right: 0;
+            bottom: 3px;
+        }
+
+        .physicianModal {
+            text-align: center;
+        }
+
+        .physicianModal .physicianPic img {
+            border: 6px solid #f8f8f8;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+            transition: all 0.3s ease 0s;
+            margin: 0 auto;
+            height: 180px;
+            width: 180px;
+        }
+
+        .physicianModal .info p, .physicianModal .info .text-info {
+            margin: 0;
+        }
+
+        .showBioBtn {
+            background-color: #337ab7;
+            padding: 5px 10px;
+            color: #fff;
+            font-size: 12px;
+        }
+
+        /*Pagination CSS*/
+        #page_navigation {
+            clear: both;
+            margin: 20px 0;
+        }
+
+        #page_navigation a {
+            padding: 3px 6px;
+            border: 1px solid #2e6da4;
+            margin: 2px;
+            color: black;
+            text-decoration: none
+        }
+
+        .active_page {
+            background: #337ab7;
+            color: white !important;
+        }
+
+
+        .pagination {
+            display: inline-block;
+        }
+
+        .pagination a {
+            color: black;
+            float: left;
+            padding: 5px 5px;
+            text-decoration: none;
+        }
+
+        .pagination a.active {
+            background-color: gray;
+            color: white;
+            border-radius: 2px;
+        }
+    </style>
+
+</head>
+<body>
+<div class="site-layout">
+    <div class="header-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="top-links">
+                        <li><i class="flaticon-info"></i><a href="faq.html" title="">Faq's</a></li>
+                    </ul>
+
+                    <div style="float: right; margin-right: 50px">
+                        <a href="?lang=hy" style="text-decoration: none"><img src="imagelanguages/img/arm.png"
+                                                                              width="27px" height="20px"></a>
+                        <a href="?lang=us" style="text-decoration: none"><img src="imagelanguages/img/eng.jpg"
+                                                                              width="27px" height="20px"></a>
+                    </div>
+
+
+                    <div class="login-area" th:if="${currentUser==null}">
+                        <ul>
+                            <li class="log-in"><a href="/sign"><i class="flaticon-unlocked" th:text="#{login}"></i> </a>
+                            </li>
+                            <li class="Register"><a href="/registration"><i class="flaticon-checked">register</i> </a>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <div class="login-area" th:if="${currentUser!=null}" }>
+
+                        <ul>
+                            <li class="log-in">
+                                <a href="#" title="">
+                                    <img th:if="${currentUser.getUser().getPicUrl()!=null && !currentUser.getUser().getPicUrl().isEmpty()}"
+                                         th:src="@{/getImage(picName=${currentUser.getUser().getPicUrl()})}" width="30">
+
+                                    <img th:if="${currentUser.getUser().getPicUrl()==null || currentUser.getUser().getPicUrl().isEmpty()}"
+                                         src="../images/profile.png" width="40">
+                                </a>
+
+
+                                <div class="login-dropdown">
+                                    <span th:text="${currentUser.getUser().getName()}"></span>
+                                    <a href="" title="">see profile</a>
+                                    <ul>
+                                        <li class="signout"><a href="/logout" title="">sign out <i
+                                                class="fa fa-power-off"></i></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <!-- topbar -->
+
+    <div class="topbar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <header>
+                        <div class="logo">
+                            <a href="index.html" title="index.html"><img src="../images/logo-black.png" alt=""></a>
+                        </div>
+                        <nav>
+                            <ul class="main-menu">
+                                <li><a href="/" title="">Home</a>
+                                </li>
+                                <li><a href="/cars" title="">cars</a>
+                                </li>
+                                <li><a href="#" title="">Term and Policy</a>
+                                </li>
+                                <li><a href="#" title="">About Us</a>
+                                </li>
+                                <li th:if="${currentUser == null}"><a href="#" title="">Become a partner</a>
+                                    <ul>
+                                        <li><a href="/registerAsDriver" title="">As a driver</a></li>
+                                        <li><a href="/registerAsDealer" title="">As a dealer</a></li>
+                                    </ul>
+                                </li>
+                                <li th:if="${currentUser != null}"><a href="#" title="">My Profile</a>
+                                    <ul>
+                                        <li><a href="orderPage.html" title="">See Profile</a></li>
+                                        <li th:if="${currentUser.getUser().getUserType().name()=='DEALER'}"><a
+                                                href="/addCar" title="">Add Cars</a></li>
+                                        <li th:if="${currentUser.getUser().getUserType().name()=='USER'}"><a
+                                                href="leasing-car-step1.html" title="">User</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                        <div class="time-info">
+                            <i class="flaticon-phone-call-1"></i>
+                            <span><i></i> (094) 020 - 582</span>
+                        </div>
+                    </header>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Responsive Header -->
+
+    <div class="sub-head blackish ext-low-opacity">
+        <div class="bg-image" style="background-image: url(/images/resources/subhead-bg.jpg)"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="cola-head">
+                        <div class="head-meta">
+                            <h4 th:text="${car.get().mark}"></h4>
+                            <h3 th:text="${car.get().model}"></h3>
+                        </div>
+
+                        <div class="info-links">
+                            <a href="#" title="">how does this work</a>
+                            <span><i class="fa fa-phone"></i>call (094) 317 - 544</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- subhead -->
+
+    <section>
+        <div class="space">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="leasing-car">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-7">
+                                    <div class="cola-form">
+                                        <h4><i class="flaticon-sign-in"></i>Order details:</h4>
+                                        <form method="post" th:action="@{/order/save(carId=${car.get().id})}" enctype="multipart/form-data"
+                                              style="display: flex; flex-direction: column">
+
+                                            <div class="model">
+                                                <label>Start date:</label>
+                                                <input type="date" id="start" name="startDate"
+                                                       value="2018-05-01"
+                                                       min="2022-05-01" max="2022-12-31">
+                                            </div>
+                                            <div class="model">
+                                                <label for="start">End date:</label>
+                                                <input type="date" id="end" name="endDate"
+                                                       value="2022-05-01"
+                                                       min="2022-05-01" max="2022-12-31">
+                                            </div>
+
+
+                                            <div class="model">
+                                                <label>Driver:</label>
+                                                <select style="width: 500px" class="nice-select" name="driver">
+                                                    <option label="Dont need driver"></option>
+                                                    <option th:each=" driver: ${drivers}"
+                                                            th:text="${driver.name +' '+ driver.surname}"
+                                                            th:value="${driver.id}">choose driver
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="body">
+                                                <label>Payment type:</label>
+                                                <select style="width: 500px" class="nice-select" name="PaymentType">
+                                                    <option th:each="paymentType : ${T(com.autorent.web.entity.PaymentType).values()}"
+                                                            th:value="${paymentType}"
+                                                            th:text="${paymentType.toString()}">chose body style
+                                                    </option>
+                                                </select>
+
+                                            </div>
+                                            <div class="model">
+                                                <span th:text="${message}"></span>
+                                            </div>
+                                            <button type="submit" class="theme-btn">Order now</button>
+                                        </form>
+
+                                    </div>
+
+
+                                </div>
+                                <div class="offset-lg-1 col-lg-5 col-md-5">
+                                    <div class="request">
+                                        <figure>
+                                            <img th:if="${car.get().carPictures != null && !car.get().carPictures.isEmpty()}"
+                                                 th:src="@{/getImage(picName=${car.get().carPictures.get(0).picUrl})}"
+                                                 width="270" height="200"/>
+                                            <img th:if="${car.get().carPictures == null || car.get().carPictures.isEmpty()}"
+                                                 src="../images/resources/no_image.png" width="270" height="200"/>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+    </section><!-- form section -->
+
+    <footer class="light">
+        <div class="mockup-right">
+            <img src="../images/resources/footer-mockup.png" alt="">
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-sm-6">
+                    <div class="widget">
+                        <a href="/" title=""><img src="../images/logo-black.png" alt=""></a>
+                        <p>
+                            The trio took this simple idea and built it into the world’s leading carpooling platform,
+                            connecting millions of people going the same way.
+                        </p>
+                        <ul class="social">
+                            <li><a href="#" title="" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#" title="" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#" title="" class="instagram"><i class="fa fa-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-6">
+                    <div class="widget">
+                        <div class="widget-title"><h4>useful links</h4></div>
+                        <ul class="list-style">
+                            <li><a href="#" title="">leasing</a></li>
+                            <li><a href="#" title="">submit route</a></li>
+                            <li><a href="#" title="">how does it work?</a></li>
+                            <li><a href="#" title="">agent listings</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="widget">
+                        <div class="widget-title"><h4>weekly news letter</h4></div>
+                        <div class="news-letter">
+                            <p>We may send you information about related events, webinars, products and services which
+                                we believe.</p>
+                            <form method="post">
+                                <input type="text" placeholder="Enter your email address">
+                                <button type="submit"><i class="fa fa-paper-plane-o"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-6">
+                    <div class="widget">
+                        <div class="widget-title"><h4>download apps</h4></div>
+                        <ul class="colla-apps">
+                            <li><a href="#" title=""><i class="flaticon-android"></i> android</a></li>
+                            <li><a href="#" title=""><i class="flaticon-apple"></i> iPhone</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottombar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <span class="copyright">© 2019. All rights reserved.</span>
+                        <i><img src="../images/credit-cards.png" alt=""></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer><!-- footer -->
+
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script src="../js/apps.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="../js/script.js"></script>
+
+</body>
+</html>		
