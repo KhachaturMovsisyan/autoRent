@@ -99,6 +99,8 @@ public class UserController {
                 User user = mapper.map(createUserRequest, User.class);
                 userService.userSave(user, file);
 
+
+
                 mailService.sendHtmlEmail(user.getEmail(),
                         "Welcome " + user.getSurname(),
                         user, " http://localhost:9090/user/activate?token=" + user.getToken(), "verifyEmail", locale);

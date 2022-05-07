@@ -15,5 +15,5 @@ public interface UserRepository extends JpaRepository<User,Integer> {
 
     Optional<User> findByToken(String token);
 
-    List<User> findUsersByUserTypeAndUserBusy(UserType userType, UserBusy userBusy);
+    List<User> findUsersByUserTypeAndBusyIs(UserType userType, UserBusy userBusy);
 }
