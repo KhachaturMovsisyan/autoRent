@@ -4,6 +4,7 @@ package com.autorent.web.service;
 import com.autorent.web.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
@@ -39,15 +40,31 @@ public class MailService {
 
         final MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         final MimeMessageHelper message =
-                new MimeMessageHelper(mimeMessage, true, "UTF-8"); // true = multipart
+                new MimeMessageHelper(mimeMessage, true, "UTF-8");
         message.setSubject(subject);
         message.setTo(to);
 
-        message.setText(htmlContent, true); // true = isHtml
+        message.setText(htmlContent, true);
 
-        // Send mail
+
         this.javaMailSender.send(mimeMessage);
     }
+
+    @Async
+    public void sendMail(String toEmail, String subject, String message) {
+
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+
+        simpleMailMessage.setTo(toEmail);
+        simpleMailMessage.setSubject(subject);
+        simpleMailMessage.setText(message);
+
+        mailSender.send(simpleMailMessage);
+    }
+
+
+
+
 
 
 }

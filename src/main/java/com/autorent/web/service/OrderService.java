@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class OrderService {
 
     private final OrderRepository orderRepository;
-    public void saveOrder(@AuthenticationPrincipal CurrentUser currentUser, Order order) {
+    public void saveOrder(Order order) {
         orderRepository.save(order);
     }
 }

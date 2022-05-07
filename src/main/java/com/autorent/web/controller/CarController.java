@@ -70,15 +70,12 @@ public class CarController {
 
     @GetMapping("/cars/{id}")
     public String singleItem(@PathVariable int id, ModelMap map) {
+        if (carService.findById(id).isEmpty()) {
+            return "404";
+        }
         map.addAttribute("car", carService.findById(id));
         return "car-detail";
     }
-
-
-
-
-
-
 }
 
 

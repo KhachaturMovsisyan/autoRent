@@ -54,43 +54,30 @@
 							<ul class="main-menu">
 								<li><a href="/" title="">Home</a>
 								</li>
-								<li><a href="#" title="">cars</a>
-									<ul>
-										<li><a href="cars.html" title="">cars</a></li>
-										<li><a href="car-profile.html" title="">car profile</a></li>
-										<li><a href="car-detail.html" title="">cars detail</a></li>
-										<li><a href="create-route-notification.html" title="">route notification</a></li>
-										<li><a href="submit-car-intro.html" title="">Submit car introduction</a></li>
-										<li><a href="submit-car-for-rent.html" title="">submit car for rent</a></li>
-										<li><a href="submit-route.html" title="">submit car route</a></li>
-									</ul>
+								<li><a href="/cars" title="">cars</a>
 								</li>
 								<li><a href="#" title="">Term and Policy</a>
-									<ul>
-										<li><a href="ride-listing.html" title="">ride listing</a></li>
-										<li><a href="ride-request.html" title="">ride request</a></li>
-										<li><a href="ride-detail.html" title="">ride detail</a></li>
-										<li><a href="ride-requests-list.html" title="">ride request list</a></li>
-									</ul>
 								</li>
-								<li><a href="#" title="">About Us</a>
-									<ul>
-										<li><a href="orderPage.html" title="">Leasing Page</a></li>
-										<li><a href="leasing-car-step1.html" title="">leasing Step 1</a></li>
-										<li><a href="addCar.html" title="">leasing step 2</a></li>
-									</ul>
+								<li><a href="/about" title="">About Us</a>
 								</li>
-								<li><a href="#" title="">Become a partner</a>
+								<li th:if="${currentUser == null}"><a href="#" title="">Become a partner</a>
 									<ul>
 										<li><a href="/registerAsDriver" title="">As a driver</a></li>
 										<li><a href="/registerAsDealer" title="">As a dealer</a></li>
+									</ul>
+								</li>
+								<li th:if="${currentUser != null}"><a href="#" title="">My Profile</a>
+									<ul>
+										<li><a th:href="@{'/user/' + ${currentUser.getUser().id}}"  title="">See Profile</a></li>
+										<li th:if="${currentUser.getUser().getUserType().name()=='DEALER'}"><a href="/addCar" title="">Add Cars</a></li>
+										<li th:if="${currentUser.getUser().getUserType().name()=='USER'}"><a href="leasing-car-step1.html" title="">User</a></li>
 									</ul>
 								</li>
 							</ul>
 						</nav>
 						<div class="time-info">
 							<i class="flaticon-phone-call-1"></i>
-							<span>Whatsapp now +374-94-020-582</span>
+							<span><i></i> (094) 020 - 582</span>
 						</div>
 					</header>
 				</div>
@@ -201,14 +188,6 @@
 					<div class="col-md-12">
 						<div class="login-sec">
 							<div class="row">
-								<div class="col-md-4">
-									<div class="log-with-fb">
-										<h4>Login in seconds:</h4>
-										<a class="facebook" href="#" title=""></i>facebook</a>
-										<a class="google" href="#" title=""></i>Google</a>
-										<a class="twitter" href="#" title=""></i>Twitter</a>
-									</div>
-								</div>
 								<div class="offset-lg-1 col-lg-7 col-md-8">
 									<div class="cola-form">
 										<h4><i class="flaticon-sign-in"></i>Register:</h4>
@@ -238,11 +217,8 @@
 												<span>Company logo:</span>
 												<input type="file" name="image"/><br>
 											</div>
-											<input type="checkbox" id="checkbox">
+											<input type="checkbox" id="checkbox" required>
 											<label for="checkbox">I accept Collabors’s <a href="#" title="">Terms & Conditions</a></label>
-
-
-
 											<button type="submit" class="theme-btn">register</button>
 										</form>
 										<span>Are you a member already? <a href="/sign" title="">Login here</a></span>

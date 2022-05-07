@@ -43,6 +43,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/addCar").hasAuthority(UserType.DEALER.name())
+                .antMatchers(HttpMethod.POST, "/order/*").hasAuthority(UserType.USER.name())
+                .antMatchers(HttpMethod.GET, "/order/*").hasAuthority(UserType.USER.name())
                 .antMatchers(HttpMethod.GET, "/profile").authenticated()
                 .anyRequest().permitAll();
 

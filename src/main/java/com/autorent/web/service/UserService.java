@@ -34,8 +34,17 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public void setBusy(User user){
+        user.setBusy(UserBusy.BUSY);
+    }
+
+    public void setFree(User user){
+        user.setBusy(UserBusy.FREE);
+    }
+
+
     public List<User> drivers(){
-        return userRepository.findUsersByUserTypeAndUserBusy(UserType.DRIVER, UserBusy.FREE);
+        return userRepository.findUsersByUserTypeAndBusyIs(UserType.DRIVER,UserBusy.FREE);
     }
 
    

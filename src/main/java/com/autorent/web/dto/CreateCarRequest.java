@@ -34,7 +34,6 @@ public class CreateCarRequest {
     private StatusType statusType;
 
 
-   private int count;
 
  
 

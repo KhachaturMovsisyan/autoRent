@@ -265,35 +265,7 @@
                     <div class="row merged">
                         <div class="col-lg-12">
                             <div class="cars-listing">
-                                <div class="more-find">
-                                    <div class="mark-car">
-                                        <label>Mark:</label>
-                                        <select style="width: 500px" class="nice-select" name="mark"
-                                                id="mySelect" onclick="addCars()"
-                                                onchange="selectNum()">
-                                            <option value="avto">choose car</option>
-                                        </select>
-                                    </div>
-                                    <div class="model">
-                                        <label>Model:</label>
-                                        <select style="width: 500px" class="nice-select" name="model" id="model"
-                                                onclick="addCarsModel()"
-                                                onchange="selectModelNum()">
-                                            <option value="avto">choose model</option>
-                                        </select>
-                                    </div>
-                                    <div class="body">
-                                        <label>Body Style:</label>
-                                        <select style="width: 500px" class="nice-select" name="CategoryType">
-                                            <option th:each="body : ${T(com.autorent.web.entity.CategoryType).values()}"
-                                                    th:value="${body}" th:text="${body}">chose body style
-                                            </option>
-                                        </select>
-
-                                    </div>
-                                    <a class="theme-btn slim" title="" href="#">find out more</a>
-                                </div>
-                                <!--                                single auto-->
+                                <!--   single car-->
                                 <input type='hidden' id='current_page'/>
                                 <input type='hidden' id='show_per_page'/>
                                     <div class="cars-lists" id="loop" style="display: grid;   grid-template-columns: 1fr 1fr;   grid-column-gap: 10px;">

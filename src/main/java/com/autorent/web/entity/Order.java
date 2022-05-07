@@ -7,22 +7,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
+
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "order")
+@Table(name = "rent")
 public class Order {
 
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int Id;
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
+    private double cost;
+
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Car car;
@@ -32,7 +35,7 @@ public class Order {
     @ManyToOne(fetch = FetchType.EAGER)
     private User driver;
 
-    private double cost;
+
 
     @Enumerated(EnumType.STRING)
     private PaymentType paymentType;

@@ -40,6 +40,6 @@ public class User {
     private UserType userType;
 
     @Enumerated(EnumType.STRING)
-    private UserBusy userBusy;
+    private UserBusy busy;
 
 }

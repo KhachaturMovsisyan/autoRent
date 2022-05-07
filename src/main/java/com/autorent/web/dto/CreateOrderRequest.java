@@ -1,12 +1,14 @@
 package com.autorent.web.dto;
 
 import com.autorent.web.entity.Car;
+import com.autorent.web.entity.PaymentType;
 import com.autorent.web.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.ManyToOne;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -14,15 +16,14 @@ import java.util.Date;
 @NoArgsConstructor
 public class CreateOrderRequest {
 
-    private Date startDate;
-    private Date endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
-    @ManyToOne
-    private Car car;
-
-    @ManyToOne
-    private User user;
-    @ManyToOne
+    private PaymentType paymentType;
     private User driver;
+
+
+
+
 
 }

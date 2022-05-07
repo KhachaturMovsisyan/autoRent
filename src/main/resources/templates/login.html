@@ -50,61 +50,36 @@
 				<div class="col-md-12">
 					<header>
 						<div class="logo">
-							<a href="index.html" title="index.html"><img src="../images/logo-black.png" alt=""></a>
+							<a href="/" title="index.html"><img src="../images/logo-black.png" alt=""></a>
 						</div>
 						<nav>
 							<ul class="main-menu">
 								<li><a href="/" title="">Home</a>
 								</li>
-								<li><a href="#" title="">cars</a>
-									<ul>
-										<li><a href="cars.html" title="">cars</a></li>
-										<li><a href="car-profile.html" title="">car profile</a></li>
-										<li><a href="car-detail.html" title="">cars detail</a></li>
-										<li><a href="create-route-notification.html" title="">route notification</a></li>
-										<li><a href="submit-car-intro.html" title="">Submit car introduction</a></li>
-										<li><a href="submit-car-for-rent.html" title="">submit car for rent</a></li>
-										<li><a href="submit-route.html" title="">submit car route</a></li>
-									</ul>
+								<li><a href="/cars" title="">cars</a>
 								</li>
 								<li><a href="#" title="">Term and Policy</a>
+								</li>
+								<li><a href="/about" title="">About Us</a>
+								</li>
+								<li th:if="${currentUser == null}"><a href="#" title="">Become a partner</a>
 									<ul>
-										<li><a href="ride-listing.html" title="">ride listing</a></li>
-										<li><a href="ride-request.html" title="">ride request</a></li>
-										<li><a href="ride-detail.html" title="">ride detail</a></li>
-										<li><a href="ride-requests-list.html" title="">ride request list</a></li>
+										<li><a href="/registerAsDriver" title="">As a driver</a></li>
+										<li><a href="/registerAsDealer" title="">As a dealer</a></li>
 									</ul>
 								</li>
-								<li><a href="#" title="">About Us</a>
+								<li th:if="${currentUser != null}"><a href="#" title="">My Profile</a>
 									<ul>
-										<li><a href="orderPage.html" title="">Leasing Page</a></li>
-										<li><a href="leasing-car-step1.html" title="">leasing Step 1</a></li>
-										<li><a href="addCar.html" title="">leasing step 2</a></li>
+										<li><a th:href="@{'/user/' + ${currentUser.getUser().id}}"  title="">See Profile</a></li>
+										<li th:if="${currentUser.getUser().getUserType().name()=='DEALER'}"><a href="/addCar" title="">Add Cars</a></li>
+										<li th:if="${currentUser.getUser().getUserType().name()=='USER'}"><a href="leasing-car-step1.html" title="">User</a></li>
 									</ul>
 								</li>
-								<li><a href="#" title="">Become a partner</a>
-									<ul>
-										<li><a href="/" title="">As a driver</a></li>
-										<li><a href="/" title="">As a dealer</a></li>
-									</ul>
-								</li>
-								<!--									<li><a href="#" title=""><i class="fa fa-ellipsis-v"></i></a>-->
-								<!--										<ul>-->
-								<!--											<li><a href="login.html" title="">Login page</a></li>-->
-								<!--											<li><a href="register.html" title="">Register Page</a></li>-->
-								<!--											<li><a href="how-this-work.html" title="">how it's work</a></li>-->
-								<!--											<li><a href="faq.html" title="">faq's</a></li>-->
-								<!--											<li><a href="points.html" title="">poinst</a></li>-->
-								<!--											<li><a href="coming-soon.html" title="">Coming Soon</a></li>-->
-								<!--											<li><a href="404.html" title="">404 Page</a></li>-->
-								<!--											-->
-								<!--										</ul>-->
-								<!--									</li>-->
 							</ul>
 						</nav>
 						<div class="time-info">
 							<i class="flaticon-phone-call-1"></i>
-							<span>Whatsapp now +374-94-020-582</span>
+							<span><i></i> (094) 020 - 582</span>
 						</div>
 					</header>
 				</div>

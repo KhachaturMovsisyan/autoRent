@@ -31,6 +31,8 @@ public class MailConfig {
         return templateEngine;
     }
 
+
+
     private ITemplateResolver textTemplateResolver() {
         final ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
         templateResolver.setOrder(Integer.valueOf(1));
