@@ -1,0 +1,14 @@
+ <div class="description">
+                                                <label>Massage to dealer:</label>
+                                                <textarea
+                                                        style="width: 500px; height: 100px;white-space: pre-wrap;line-height: 15px;"
+                                                        class="nice-select"
+                                                        type="text" name="MassageDealer"> </textarea><br>
+                                            </div>
+                                            <div class="description">
+                                                <label>Massage to driver:</label>
+                                                <textarea
+                                                        style="width: 500px; height: 100px;white-space: pre-wrap;line-height: 15px;"
+                                                        class="nice-select"
+                                                        type="text" name="MassageDriver"> </textarea><br>
+                                            </div>
