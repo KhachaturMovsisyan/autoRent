@@ -47,12 +47,6 @@ public class CarService {
         return carRepository.findAll(pageable);
     }
 
-//    public List<Car> findLast10(){
-//
-//        return carRepository.findTop3ByOrderByIdDesc();
-//
-//    }
-
 
     public Optional<Car> findById(int id) {
         return carRepository.findById(id);
