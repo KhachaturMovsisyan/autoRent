@@ -8,6 +8,7 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
+import org.thymeleaf.templateresolver.StringTemplateResolver;
 
 import java.util.Collections;
 
@@ -44,5 +45,13 @@ public class MailConfig {
         templateResolver.setCacheable(false);
         return templateResolver;
     }
+    private ITemplateResolver stringTemplateResolver() {
+        final StringTemplateResolver templateResolver = new StringTemplateResolver();
+        templateResolver.setOrder(3);
+        templateResolver.setTemplateMode("HTML");
+        templateResolver.setCacheable(false);
+        return templateResolver;
+    }
+
 
 }

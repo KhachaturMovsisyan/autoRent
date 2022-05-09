@@ -39,9 +39,9 @@ public class OrderController {
 
     private final UserService userService;
 
-    private final MailService mailService;
 
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+
+
 
 
     @GetMapping("/order/{id}")
@@ -68,63 +68,18 @@ public class OrderController {
         }
         if (createOrderRequest.getDriver() == null) {
 
-            order.setStartDate(startDate.format(formatter));
-            order.setEndDate(endDate.format(formatter));
-            order.setCost(Period.between(startDate, endDate).getDays() * orderedCar.getPricePerDay());
-            order.setUser(currentUser.getUser());
-            order.setPaymentType(createOrderRequest.getPaymentType());
-            order.setCar(orderedCar);
-            orderedCar.setStatusType(StatusType.BUSY);
+            orderService.saveOrderWithoutDriver( order, orderedCar,createOrderRequest.getPaymentType(), currentUser, startDate, endDate);
             map.addAttribute("message", message.append("Your order is completed"));
-            orderService.saveOrder(order);
-            messageToMails(order, currentUser.getUser());
+
             return "redirect:/order/" + id;
         }
 
-        order.setStartDate(startDate.format(formatter));
-        order.setEndDate(endDate.format(formatter));
-        order.setDriver(createOrderRequest.getDriver());
-        order.setCost(Period.between(startDate, endDate).getDays() * (orderedCar.getPricePerDay() + createOrderRequest.getDriver().getDriverHourlyRate()));
-        order.setUser(currentUser.getUser());
-        order.setPaymentType(createOrderRequest.getPaymentType());
-        order.setCar(orderedCar);
-        orderedCar.setStatusType(StatusType.BUSY);
-        carService.findById(id).get().setStatusType(StatusType.BUSY);
-        userService.setBusy(createOrderRequest.getDriver());
-        messageToMails(order, currentUser.getUser());
-        messageToMails(order, currentUser.getUser(), order.getDriver());
-
+        orderService.saveOrderWithDriver(order,orderedCar,createOrderRequest.getPaymentType(),currentUser,createOrderRequest.getDriver(), startDate,endDate);
         map.addAttribute("message", message.append("Your order is completed"));
-        orderService.saveOrder(order);
         return "redirect:/order/" + id;
     }
 
-    private void messageToMails(Order order, User currentUser) {
-        String messageToOwner = "Your car " + order.getCar().getModel() +
-                " " + order.getCar().getMark() + " The price of order is " + order.getCost()
-                + " from " + order.getStartDate() + " to " + order.getEndDate() + " ."
-                + " If you want to contact with client, this is client's contacts " + currentUser.getEmail()
-                + " phone " + currentUser.getPhoneNumber() + " Enjoy! Best Regards";
 
-        String messageToOrder = "You just ordered" + order.getCar().getModel() +
-                " " + order.getCar().getMark() + " The price of order is " + order.getCost()
-                + " from " + order.getStartDate() + " to " + order.getEndDate() + " ."
-                + " If you want to contact with owner, this is owner's contacts " + order.getCar().getUser().getEmail()
-                + " phone " + order.getCar().getUser().getPhoneNumber() + " Enjoy! Best Regards";
-
-        mailService.sendMail(currentUser.getEmail(), "Your Order", messageToOrder);
-        mailService.sendMail(order.getUser().getEmail(), "New Order", messageToOwner);
-    }
-
-    private void messageToMails(Order order, User currentUser, User driver) {
-        String messageToDriver = "You just invented to drive" + order.getCar().getModel() +
-                " " + order.getCar().getMark() + " The pay of  this work is " + order.getCost()
-                + " from " + order.getStartDate() + " to " + order.getEndDate() + " ."
-                + " If you want to contact with owner or clients, this is owner's and clients contacts the owner` " + order.getCar().getUser().getEmail()
-                + " phone " + order.getCar().getUser().getPhoneNumber() + " and this is clients contacts` " + currentUser.getEmail()
-                + " phone " + currentUser.getPhoneNumber() + " Enjoy! Best Regards";
-        mailService.sendMail(driver.getEmail(), "New Invention", messageToDriver);
-    }
 }
 
 
